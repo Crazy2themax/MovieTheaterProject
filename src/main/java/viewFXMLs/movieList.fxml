@@ -15,9 +15,9 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button id="addMovieButton" layoutX="320.0" layoutY="125.0" mnemonicParsing="false" text="Add Movie" />
-      <Button id="editMovieButton" layoutX="321.0" layoutY="174.0" mnemonicParsing="false" text="Edit Movie" />
-      <Button id="DeleteMovieButton" layoutX="314.0" layoutY="219.0" mnemonicParsing="false" text="Delete Movie" />
-      <Button id="backButton" layoutX="359.0" layoutY="333.0" mnemonicParsing="false" text="back" />
+      <Button fx:id="addMovieButton" layoutX="320.0" layoutY="125.0" mnemonicParsing="false" text="Add Movie" />
+      <Button fx:id="editMovieButton" layoutX="321.0" layoutY="174.0" mnemonicParsing="false" text="Edit Movie" />
+      <Button fx:id="DeleteMovieButton" layoutX="314.0" layoutY="219.0" mnemonicParsing="false" text="Delete Movie" />
+      <Button fx:id="backButton" layoutX="359.0" layoutY="333.0" mnemonicParsing="false" text="back" />
    </children>
 </AnchorPane>
