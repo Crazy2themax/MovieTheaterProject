@@ -13,15 +13,18 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="87.0" layoutY="75.0" text="Movie ID" />
-      <Label layoutX="75.0" layoutY="127.0" text="roomNumber" />
-      <Label layoutX="97.0" layoutY="182.0" text="Time" />
-      <Label layoutX="97.0" layoutY="237.0" text="Date" />
-      <TextField id="addShowTimeMovieIDTextField" layoutX="184.0" layoutY="71.0" />
-      <TextField id="addShowTimeRoonNumberTextField" layoutX="184.0" layoutY="123.0" />
-      <TextField id="addShowTimeTimeTextField" layoutX="184.0" layoutY="178.0" />
-      <TextField id="addShowTimeDateTextField" layoutX="184.0" layoutY="233.0" />
-      <Button id="addShowTimeSaveButton" layoutX="158.0" layoutY="284.0" mnemonicParsing="false" text="Save" />
-      <Button id="addShowTimeCancelButton" layoutX="308.0" layoutY="284.0" mnemonicParsing="false" text="Cancel" />
+      <Label layoutX="96.0" layoutY="71.0" text="Movie ID" />
+      <Label layoutX="84.0" layoutY="150.0" text="roomNumber" />
+      <Label layoutX="105.0" layoutY="196.0" text="Time" />
+      <Label layoutX="107.0" layoutY="234.0" text="Date" />
+      <TextField id="addShowTimeMovieIDTextField" layoutX="194.0" layoutY="67.0" />
+      <TextField id="addShowTimeRoonNumberTextField" layoutX="194.0" layoutY="146.0" />
+      <TextField id="addShowTimeTimeTextField" layoutX="194.0" layoutY="192.0" />
+      <TextField id="addShowTimeDateTextField" layoutX="194.0" layoutY="230.0" />
+      <Button id="addShowtimeSaveButton" layoutX="174.0" layoutY="268.0" mnemonicParsing="false" text="Save" />
+      <Button id="addShowTimeCancelButton" layoutX="318.0" layoutY="268.0" mnemonicParsing="false" text="Cancel" />
+      <Label layoutX="85.0" layoutY="109.0" text="MovieI Image" />
+      <TextField id="addShowTimeImageLocationTextField" layoutX="194.0" layoutY="105.0" />
+      <Button id="addShowTimeBrowserButton" layoutX="349.0" layoutY="105.0" mnemonicParsing="false" text="Browser" />
    </children>
 </AnchorPane>
