@@ -6,6 +6,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<!--
+    FXML Layout: EditShowTime.fxml
+    Description:
+        This layout defines the "Edit Showtime" form in the JavaFX application.
+        It allows the user to edit an existing showtime's movie ID, room number, time, date,
+        and optionally update the associated image. Provides buttons to save changes, cancel
+        editing, or browse for an image file.
+
+    Controller:
+        fx:controller="EditShowTime"
+
+    Elements:
+        - AnchorPane: Root layout container with prefHeight=319.0 and prefWidth=422.0
+        - Label "Edit Showtime": Title label with font size 20
+        - Label "Movie ID": Label for movie ID input
+        - TextField editShowTimeMovieIDTextField: Input field for movie ID
+        - Label "roomNumber": Label for room number input
+        - TextField editShowTimeRoonNumberTextField: Input field for room number (note typo: Roon)
+        - Label "Time": Label for showtime time input
+        - TextField editShowTimeTimeTextField: Input field for showtime time
+        - Label "Date": Label for showtime date input
+        - TextField editShowTimeDateTextField: Input field for showtime date
+        - Label "MovieI Image": Label for movie image selection (note typo: MovieI)
+        - TextField editShowTimeImageLocationTextField: Input field for image path
+        - Button editShowtimeSaveButton: Button to save the edited showtime
+        - Button editShowTimeCancelButton: Button to cancel editing
+        - Button editShowTimeBrowserButton: Button to browse for an image file
+-->
 <AnchorPane prefHeight="319.0" prefWidth="422.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EditShowTime">
    <children>
       <Label layoutX="24.0" layoutY="24.0" text="Edit Showtime">

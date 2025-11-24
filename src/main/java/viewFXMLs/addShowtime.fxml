@@ -6,6 +6,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<!--
+    FXML Layout: AddShowtime.fxml
+    Description:
+        This layout defines the "Add Showtime" form in the JavaFX application.
+        It allows the user to enter a movie ID, room number, time, date, and optionally select an image.
+        Provides buttons to save the showtime, cancel the operation, or browse for an image file.
+
+    Controller:
+        fx:controller="AddShowtime"
+
+    Elements:
+        - AnchorPane: Root layout container with prefHeight=337.0 and prefWidth=396.0
+        - Label "add Showtime": Title label with font size 20
+        - Label "Movie ID": Label for movie ID input
+        - TextField addShowTimeMovieIDTextField: Input field for movie ID
+        - Label "roomNumber": Label for room number input
+        - TextField addShowTimeRoonNumberTextField: Input field for room number (note typo: Roon)
+        - Label "Time": Label for showtime time input
+        - TextField addShowTimeTimeTextField: Input field for showtime time
+        - Label "Date": Label for showtime date input
+        - TextField addShowTimeDateTextField: Input field for showtime date
+        - Label "MovieI Image": Label for movie image selection (note typo: MovieI)
+        - TextField addShowTimeImageLocationTextField: Input field for image path
+        - Button addShowtimeSaveButton: Button to save the showtime
+        - Button addShowTimeCancelButton: Button to cancel the operation
+        - Button addShowTimeBrowserButton: Button to browse for an image file
+-->
 <AnchorPane prefHeight="337.0" prefWidth="396.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AddShowtime">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="add Showtime">

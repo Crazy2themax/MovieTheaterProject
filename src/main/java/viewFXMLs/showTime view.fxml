@@ -7,11 +7,42 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<!--
+    FXML Layout: ShowTimeView.fxml
+    Description:
+        This layout defines the "ShowTimes (Manager View)" in the JavaFX application.
+        It displays showtime cards for movies with associated images, durations, and times.
+        Provides buttons to log out, edit showtimes, add showtimes, delete showtimes, and
+        open the movie list.
 
+    Controller:
+        fx:controller="ShowTimeView"
+
+    Elements:
+        - AnchorPane: Root layout container with prefHeight=378.0 and prefWidth=446.0
+        - Label "ShowTimes (Manager View)": Title label
+        - Button LogOutShowTimeMangerViewButton: Logs out the manager
+        - AnchorPane (Movie Card): Displays movie information
+            - Label: Movie title (e.g., "Moana")
+            - ImageView: Movie poster
+            - Label: Movie duration
+            - Labels: Available showtimes
+        - AnchorPane (Movie Card): Another movie information card (e.g., "Avengers Endgame")
+            - Label: Movie title
+            - ImageView: Movie poster
+            - Label: Movie duration
+            - Labels: Available showtimes
+        - Button editShowTimeMangerViewButton: Opens edit showtime form
+        - Button AddShowTimeMangerViewButton: Opens add showtime form
+        - Button movieListShowTimeMangerViewButton: Opens movie list view
+        - Button DeleteShowTimeMangerViewButton: Deletes selected showtime
+-->
 <AnchorPane prefHeight="378.0" prefWidth="446.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShowTimeView">
    <children>
       <Label layoutX="20.0" layoutY="14.0" prefHeight="18.0" prefWidth="146.0" text="ShowTimes (Manager View) " />
       <Button fx:id="LogOutShowTimeMangerViewButton" layoutX="377.0" layoutY="19.0" mnemonicParsing="false" text="Log Out" />
+
+      <!-- Movie Card 1: Moana -->
       <AnchorPane depthTest="DISABLE" layoutX="13.0" layoutY="46.0" prefHeight="132.0" prefWidth="287.0" style="-fx-border-color:: black;">
          <opaqueInsets>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -29,6 +60,8 @@
             <Label layoutX="211.0" layoutY="93.0" prefHeight="18.0" prefWidth="22.0" text="8:30" />
          </children>
       </AnchorPane>
+
+      <!-- Movie Card 2: Avengers Endgame -->
       <AnchorPane depthTest="DISABLE" layoutX="20.0" layoutY="217.0" prefHeight="132.0" prefWidth="274.0" style="-fx-border-color:: black;">
          <opaqueInsets>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -46,6 +79,7 @@
             <Label layoutX="190.0" layoutY="93.0" prefHeight="18.0" prefWidth="38.0" text="10:30" />
          </children>
       </AnchorPane>
+
       <Button fx:id="editShowTimeMangerViewButton" layoutX="306.0" layoutY="86.0" mnemonicParsing="false" text="Edit Showtime" />
       <Button fx:id="AddShowTimeMangerViewButton" layoutX="305.0" layoutY="152.0" mnemonicParsing="false" text="add ShowTime" />
       <Button fx:id="movieListShowTimeMangerViewButton" layoutX="363.0" layoutY="336.0" mnemonicParsing="false" text="Movie List" />
