@@ -1,3 +1,5 @@
+package com.example.movietheater.Models;
+
 /**
  * Represents a movie in the system.
  * Contains basic information such as ID, title, and duration.

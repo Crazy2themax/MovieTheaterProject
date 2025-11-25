@@ -1,3 +1,5 @@
+package com.example.movietheater.Models;
+
 /**
  * Represents a ticket for a movie showing.
  * Contains information about the ticket ID, associated movie, seat, showtime, and client.

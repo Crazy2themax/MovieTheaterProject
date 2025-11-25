@@ -1,12 +1,11 @@
-package controllers;
+package com.example.movietheater.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 import java.io.File;
 
 /**
@@ -102,7 +101,7 @@ public class addShowtimeController {
     @FXML
     private void onBrowseImage() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Movie Image");
+        fileChooser.setTitle("Select com.example.movietheater.Models.Movie Image");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );

@@ -1,4 +1,4 @@
-package controllers;
+package com.example.movietheater.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * Controller class for the "Edit Movie" view.
+ * Controller class for the "Edit com.example.movietheater.Models.Movie" view.
  * <p>
  * Handles the interaction for editing an existing movie's information,
  * including movie ID, title, and duration. Provides functionality to save changes
@@ -57,7 +57,7 @@ public class EditMovieController {
     @FXML
     private void onSaveMovie() {
         // validate & save updated movie
-        System.out.println("Movie saved.");
+        System.out.println("com.example.movietheater.Models.Movie saved.");
     }
 
     /**

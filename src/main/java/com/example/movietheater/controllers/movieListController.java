@@ -1,4 +1,4 @@
-package controllers;
+package com.example.movietheater.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,7 +8,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 /**
- * Controller class for the "Movie List" view.
+ * Controller class for the "com.example.movietheater.Models.Movie List" view.
  * <p>
  * Handles displaying the list of movies and provides functionality to add,
  * edit, or delete movies. Also allows navigating back to the previous screen.
@@ -16,11 +16,11 @@ import javafx.stage.Stage;
  */
 public class movieListController {
 
-    /** ListView displaying the movies. Replace '?' with the Movie model when available. */
+    /** ListView displaying the movies. Replace '?' with the com.example.movietheater.Models.Movie model when available. */
     @FXML
     private ListView<?> movieListView;
 
-    /** Button to open the Add Movie screen. */
+    /** Button to open the Add com.example.movietheater.Models.Movie screen. */
     @FXML
     private Button addMovieButton;
 
@@ -48,11 +48,11 @@ public class movieListController {
     }
 
     /**
-     * Opens the Add Movie view.
+     * Opens the Add com.example.movietheater.Models.Movie view.
      */
     @FXML
     private void onAddMovie() {
-        System.out.println("Open Add Movie screen.");
+        System.out.println("Open Add com.example.movietheater.Models.Movie screen.");
         // open AddMovie view
     }
 

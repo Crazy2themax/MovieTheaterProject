@@ -1,4 +1,4 @@
-package controllers;
+package com.example.movietheater.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,9 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * Controller class for the "Add Movie" view.
+ * Controller class for the "Add com.example.movietheater.Models.Movie" view.
  * <p>
- * This class handles the interaction between the user and the "Add Movie" form,
+ * This class handles the interaction between the user and the "Add com.example.movietheater.Models.Movie" form,
  * allowing the user to input a movie ID, title, and duration, and either save or cancel the action.
  * </p>
  */

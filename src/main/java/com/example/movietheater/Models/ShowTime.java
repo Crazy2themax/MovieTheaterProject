@@ -1,9 +1,11 @@
+package com.example.movietheater.Models;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
  * Represents a scheduled showtime for a movie.
- * Contains information about the showtime's ID, date, time, associated movie, room, and manager.
+ * Contains information about the showtime's ID, date, time, associated movie, room, and com.example.movietheater.Models.manager.
  */
 public class ShowTime {
 
@@ -22,11 +24,11 @@ public class ShowTime {
     /** The ID of the room where the showtime takes place. */
     private int roomID;
 
-    /** The ID of the manager who created/owns this showtime. */
+    /** The ID of the com.example.movietheater.Models.manager who created/owns this showtime. */
     private int managerID;
 
     /**
-     * Constructs a ShowTime object with the given IDs.
+     * Constructs a com.example.movietheater.Models.ShowTime object with the given IDs.
      * The date and time are initialized as null and can be set later.
      *
      * @param showTimeID the unique identifier of the showtime
@@ -34,7 +36,7 @@ public class ShowTime {
      * @param time the time of the showtime (currently ignored, initialized as null)
      * @param movieID the ID of the movie
      * @param roomID the ID of the room
-     * @param managerID the ID of the manager
+     * @param managerID the ID of the com.example.movietheater.Models.manager
      */
     public ShowTime(int showTimeID, LocalDate date, LocalTime time, int movieID, int roomID, int managerID) {
         this.showTimeID = showTimeID;

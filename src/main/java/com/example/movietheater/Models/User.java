@@ -1,6 +1,8 @@
+package com.example.movietheater.Models;
+
 /**
  * Abstract base class representing a generic user in the system.
- * All types of users (e.g., Client, Manager) should extend this class.
+ * All types of users (e.g., com.example.movietheater.Models.Client, Manager) should extend this class.
  *
  * Fields:
  * - Id: Unique identifier for the user.
@@ -26,7 +28,7 @@ public abstract class User {
     protected String Password;
 
     /**
-     * Constructs a User object with the specified parameters.
+     * Constructs a com.example.movietheater.Models.User object with the specified parameters.
      *
      * @param id the unique identifier for the user
      * @param name the name of the user

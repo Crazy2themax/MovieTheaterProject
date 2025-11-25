@@ -1,4 +1,4 @@
-package controllers;
+package com.example.movietheater.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -96,7 +96,7 @@ public class EditShowtimeController {
     @FXML
     private void onBrowseImage() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Movie Image");
+        fileChooser.setTitle("Select com.example.movietheater.Models.Movie Image");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );

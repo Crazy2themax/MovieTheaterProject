@@ -1,3 +1,5 @@
+package com.example.movietheater.Models;
+
 /**
  * Represents a movie theater room.
  * Contains information about the room's ID, capacity, and room number.

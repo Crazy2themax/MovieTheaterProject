@@ -20,7 +20,7 @@
     Elements:
         - AnchorPane: Root layout container with prefHeight=319.0 and prefWidth=422.0
         - Label "Edit Showtime": Title label with font size 20
-        - Label "Movie ID": Label for movie ID input
+        - Label "com.example.movietheater.Models.Movie ID": Label for movie ID input
         - TextField editShowTimeMovieIDTextField: Input field for movie ID
         - Label "roomNumber": Label for room number input
         - TextField editShowTimeRoonNumberTextField: Input field for room number (note typo: Roon)
@@ -41,7 +41,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="96.0" layoutY="71.0" text="Movie ID" />
+      <Label layoutX="96.0" layoutY="71.0" text="com.example.movietheater.Models.Movie ID" />
       <Label layoutX="84.0" layoutY="150.0" text="roomNumber" />
       <Label layoutX="105.0" layoutY="196.0" text="Time" />
       <Label layoutX="107.0" layoutY="234.0" text="Date" />

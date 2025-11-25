@@ -1,4 +1,4 @@
-package controllers;
+package com.example.movietheater.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class showtimeViewController {
 
-    /** Button to log out from the showtime manager view. */
+    /** Button to log out from the showtime com.example.movietheater.Models.manager view. */
     @FXML
     private Button LogOutShowTimeMangerViewButton;
 
