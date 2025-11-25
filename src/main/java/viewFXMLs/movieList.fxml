@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<!--
+    FXML Layout: MovieList.fxml
+    Description:
+        This layout defines the "Movie List" view in the JavaFX application.
+        It displays a list of movies and provides buttons to add, edit, delete movies,
+        or navigate back.
+
+    Controller:
+        fx:controller="MovieList"
+
+    Elements:
+        - AnchorPane: Root layout container with prefHeight=400.0 and prefWidth=446.0
+        - Label "Movie List": Title label with font size 32
+        - ListView: Displays the list of movies (consider binding to a Movie model)
+        - Button addMovieButton: Button to open Add Movie form
+        - Button editMovieButton: Button to edit the selected movie
+        - Button DeleteMovieButton: Button to delete the selected movie
+        - Button backButton: Button to go back or close the view
+-->
+<AnchorPane prefHeight="400.0" prefWidth="446.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MovieList">
+   <children>
+      <ListView layoutX="58.0" layoutY="109.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="14.0" layoutY="14.0" text="Movie List">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Button fx:id="addMovieButton" layoutX="320.0" layoutY="125.0" mnemonicParsing="false" text="Add Movie" />
+      <Button fx:id="editMovieButton" layoutX="321.0" layoutY="174.0" mnemonicParsing="false" text="Edit Movie" />
+      <Button fx:id="DeleteMovieButton" layoutX="314.0" layoutY="219.0" mnemonicParsing="false" text="Delete Movie" />
+      <Button fx:id="backButton" layoutX="359.0" layoutY="333.0" mnemonicParsing="false" text="back" />
+   </children>
+</AnchorPane>
