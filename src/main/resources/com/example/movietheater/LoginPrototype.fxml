@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="309.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="309.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="nameTextPrompt" layoutX="197.0" layoutY="98.0" prefHeight="26.0" prefWidth="290.0" promptText="Enter Username">
          <opaqueInsets>
@@ -44,5 +44,6 @@
             <Insets />
          </opaqueInsets>
       </Label>
+      <Button fx:id="managerLogInButton" layoutX="31.0" layoutY="184.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="126.0" text="Log in as manager" />
    </children>
 </AnchorPane>
