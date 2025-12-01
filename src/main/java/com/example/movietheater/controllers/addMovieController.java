@@ -1,9 +1,12 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.Models.Movie;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Controller class for the "Add com.example.movietheater.Models.Movie" view.
@@ -55,11 +58,25 @@ public class addMovieController {
      */
     @FXML
     private void onSaveMovie() {
-        String id = addMovieIDTextField.getText();
-        String title = addMovieTitleTextField.getText();
-        String duration = addMovieDurationTextField.getText();
-        System.out.println("Saving movie: " + id + " - " + title + " (" + duration + ")");
-        // TODO: validate & add to list/model
+        try {
+            int id = Integer.parseInt(addMovieIDTextField.getText());
+            String title = addMovieTitleTextField.getText();
+            int duration = Integer.parseInt(addMovieDurationTextField.getText());
+
+            if(title.isEmpty()){
+                new Alert(AlertType.WARNING,"Movie title cannot be empty").showAndWait();
+                return;
+            }
+            //to add the movie to the list of movies
+            Movie newMovie = new Movie(id, title, duration);
+
+            //to close the window if everything worked well
+            Stage s = (Stage) addMovieSaveButton.getScene().getWindow();
+            s.close();
+        }catch (Exception e) {
+            new Alert(AlertType.ERROR,"Invalid ID or duration").showAndWait();
+        }
+
     }
 
     /**
