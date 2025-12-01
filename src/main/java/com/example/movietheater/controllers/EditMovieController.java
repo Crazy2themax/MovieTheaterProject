@@ -1,5 +1,6 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.Models.Movie;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -15,6 +16,14 @@ import javafx.stage.Stage;
  */
 public class EditMovieController {
 
+    private Movie movie;
+
+    public void setMovie(Movie aMovie) {
+        this.movie = aMovie;
+        editMovieIDTextField.setText(String.valueOf(movie.getpMovieID()));
+        editMovieTitleTextField.setText(movie.getpTitle());
+        editMovieDurationTextField.setText(String.valueOf(movie.getpDuration()));
+    }
     /** TextField for editing the movie ID. */
     @FXML
     private TextField editMovieIDTextField;
@@ -57,8 +66,14 @@ public class EditMovieController {
     @FXML
     private void onSaveMovie() {
         // validate & save updated movie
-        System.out.println("com.example.movietheater.Models.Movie saved.");
+        movie.setpMovieID(Integer.parseInt(editMovieIDTextField.getText()));
+        movie.setpTitle(editMovieTitleTextField.getText());
+        movie.setpDuration(Integer.parseInt(editMovieDurationTextField.getText()));
+
+        Stage s = (Stage) editMovieSaveButton.getScene().getWindow();
+        s.close();
     }
+
 
     /**
      * Handles cancelling the edit operation.
@@ -71,4 +86,6 @@ public class EditMovieController {
         Stage s = (Stage) editMovieCancelButton.getScene().getWindow();
         s.close();
     }
+
+
 }
