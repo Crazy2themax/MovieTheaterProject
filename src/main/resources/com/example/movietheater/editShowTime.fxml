@@ -35,7 +35,7 @@
         - Button editShowTimeBrowserButton: Button to browse for an image file
 -->
 
-<AnchorPane prefHeight="319.0" prefWidth="422.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EditShowTime">
+<AnchorPane prefHeight="319.0" prefWidth="422.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movietheater.controllers.EditShowtimeController">
    <children>
       <Label layoutX="24.0" layoutY="24.0" text="Edit Showtime">
          <font>

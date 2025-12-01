@@ -38,7 +38,7 @@
         - Button DeleteShowTimeMangerViewButton: Deletes selected showtime
 -->
 
-<AnchorPane prefHeight="415.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShowTimeView">
+<AnchorPane prefHeight="415.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movietheater.controllers.showtimeViewController">
    <children>
       <Label layoutX="14.0" layoutY="11.0" prefHeight="30.0" prefWidth="257.0" text="ShowTimes (Manager View) ">
          <font>

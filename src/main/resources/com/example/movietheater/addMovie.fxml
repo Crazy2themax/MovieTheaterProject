@@ -29,7 +29,7 @@
         - Button addMoveiCancelButton: Button to cancel the operation (note typo: Movei)
 -->
 
-<AnchorPane prefHeight="245.0" prefWidth="422.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AddMovie">
+<AnchorPane prefHeight="245.0" prefWidth="422.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movietheater.controllers.addMovieController">
    <children>
       <Button fx:id="addMovieSaveButton" layoutX="165.0" layoutY="189.0" mnemonicParsing="false" text="Save" />
       <Label layoutX="14.0" layoutY="14.0" text="Add Movie">
