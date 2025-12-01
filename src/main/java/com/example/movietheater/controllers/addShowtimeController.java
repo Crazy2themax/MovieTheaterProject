@@ -1,12 +1,15 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.Models.DataStore;
+import com.example.movietheater.Models.ShowTime;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Controller class for the "Add Showtime" view.
@@ -70,13 +73,26 @@ public class addShowtimeController {
      */
     @FXML
     private void onSaveShowtime() {
-        String movieId = addShowTimeMovieIDTextField.getText();
-        String room = addShowTimeRoonNumberTextField.getText();
-        String time = addShowTimeTimeTextField.getText();
-        String date = addShowTimeDateTextField.getText();
-        String image = addShowTimeImageLocationTextField.getText();
-        System.out.println("Saving showtime: " + movieId + ", room " + room + ", " + date + " " + time + ", image=" + image);
-        // TODO: add validation and storage logic
+        try {
+            int movieID = Integer.parseInt(addShowTimeDateTextField.getText());
+            int roomID = Integer.parseInt(addShowTimeRoonNumberTextField.getText());
+            LocalTime time = LocalTime.parse(addShowTimeTimeTextField.getText());
+            LocalDate date = LocalDate.parse(addShowTimeDateTextField.getText());
+
+            ShowTime newShowtime = new ShowTime(
+                    DataStore.showTimes.size() + 1, date, time, movieID, roomID, 1
+            );
+
+            newShowtime.setDate(date);
+            newShowtime.setTime(time);
+
+            DataStore.showTimes.add(newShowtime);
+            Stage s = (Stage) addShowTimeCancelButton.getScene().getWindow();
+            s.close();
+            System.out.println("Showtime added:" + newShowtime.getpDate());
+        }catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid input. Check ID's , Time , and date format.").showAndWait();
+        }
     }
 
     /**
@@ -89,28 +105,5 @@ public class addShowtimeController {
     private void onCancel() {
         Stage s = (Stage) addShowTimeCancelButton.getScene().getWindow();
         s.close();
-    }
-
-    /**
-     * Handles browsing for an image file.
-     * <p>
-     * Opens a FileChooser dialog allowing the user to select an image file for the showtime.
-     * Updates the image location text field with the selected file path.
-     * </p>
-     */
-    @FXML
-    private void onBrowseImage() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select com.example.movietheater.Models.Movie Image");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
-        );
-        Stage s = (Stage) addShowTimeBrowserButton.getScene().getWindow();
-        File sel = fileChooser.showOpenDialog(s);
-        if (sel != null) {
-            addShowTimeImageLocationTextField.setText(sel.getAbsolutePath());
-            // optionally show preview if you have an ImageView
-            System.out.println("Selected image: " + sel.getAbsolutePath());
-        }
     }
 }

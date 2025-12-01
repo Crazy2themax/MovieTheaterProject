@@ -1,121 +1,118 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.Models.DataStore;
+import com.example.movietheater.Models.Movie;
+import com.example.movietheater.Models.ShowTime;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
-/**
- * Controller class for the "Showtime Manager View".
- * <p>
- * Handles displaying showtimes and provides functionality for logging out,
- * adding, editing, deleting showtimes, and opening the movie list.
- * Optional AnchorPane references can be used for individual showtime cards.
- * </p>
- */
+import java.time.format.DateTimeFormatter;
+
 public class showtimeViewController {
 
-    /** Button to log out from the showtime com.example.movietheater.Models.manager view. */
     @FXML
     private Button LogOutShowTimeMangerViewButton;
 
-    /** Button to edit the selected showtime. */
     @FXML
     private Button editShowTimeMangerViewButton;
 
-    /** Button to add a new showtime. */
     @FXML
     private Button AddShowTimeMangerViewButton;
 
-    /** Button to open the movie list view. */
     @FXML
     private Button movieListShowTimeMangerViewButton;
 
-    /** Button to delete the selected showtime. */
     @FXML
     private Button DeleteShowTimeMangerViewButton;
 
-    /** Optional AnchorPane representing the first showtime card. */
     @FXML
-    private AnchorPane showtimeCard1;
+    private TableView<ShowTime> showtimeTableView;
 
-    /** Optional AnchorPane representing the second showtime card. */
     @FXML
-    private AnchorPane showtimeCard2;
+    private TableColumn<ShowTime, String> movieTitleColumn;
 
-    /** Optional ListView to display showtimes as a list. */
     @FXML
-    private ListView<?> showtimeListView;
+    private TableColumn<ShowTime, String> timeColumn;
 
-    /**
-     * Initializes the controller.
-     * <p>
-     * Called automatically after the FXML file has been loaded.
-     * Can be used to load showtimes into the view or initialize UI elements.
-     * </p>
-     */
+    @FXML
+    private TableColumn<ShowTime, String> dateColumn;
+
+    @FXML
+    private TableColumn<ShowTime, Integer> durationColumn;
+
+    private ObservableList<ShowTime> showtimeObservableList;
+
     @FXML
     public void initialize() {
-        // load showtimes into view, e.g. showtimeListView
+        // Table columns
+        movieTitleColumn.setCellValueFactory(cellData -> {
+            Movie m = DataStore.getMovieById(cellData.getValue().getpMovieID());
+            return new javafx.beans.property.SimpleStringProperty(m != null ? m.getpTitle() : "Unknown");
+        });
+
+        timeColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getpTime() != null)
+                return new javafx.beans.property.SimpleStringProperty(cellData.getValue().getpTime().format(DateTimeFormatter.ofPattern("HH:mm")));
+            return new javafx.beans.property.SimpleStringProperty("Not set");
+        });
+
+        dateColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getpDate() != null)
+                return new javafx.beans.property.SimpleStringProperty(cellData.getValue().getpDate().toString());
+            return new javafx.beans.property.SimpleStringProperty("Not set");
+        });
+
+        durationColumn.setCellValueFactory(cellData -> {
+            Movie m = DataStore.getMovieById(cellData.getValue().getpMovieID());
+            return new javafx.beans.property.SimpleIntegerProperty(m != null ? m.getpDuration() : 0).asObject();
+        });
+
+        showtimeObservableList = FXCollections.observableArrayList(DataStore.showTimes);
+        showtimeTableView.setItems(showtimeObservableList);
     }
 
-    /**
-     * Handles logout action.
-     * <p>
-     * Performs logout operations and navigates back to the login view.
-     * </p>
-     */
-    @FXML
-    private void onLogout() {
-        System.out.println("Logout clicked.");
-        // TODO: perform logout, navigate to login
-    }
-
-    /**
-     * Handles editing the selected showtime.
-     * <p>
-     * Navigates to the edit showtime view with the selected showtime.
-     * </p>
-     */
-    @FXML
-    private void onEditShowtime() {
-        System.out.println("Edit showtime clicked.");
-        // TODO: go to editShowTime.fxml with selected showtime
-    }
-
-    /**
-     * Handles adding a new showtime.
-     * <p>
-     * Opens the AddShowtime view for creating a new showtime.
-     * </p>
-     */
     @FXML
     private void onAddShowtime() {
         System.out.println("Add showtime clicked.");
-        // TODO: open AddShowtime view
+        // TODO: open AddShowtime.fxml and add to DataStore.showTimes
     }
 
-    /**
-     * Opens the movie list view.
-     * <p>
-     * Allows the user to view all movies associated with the showtimes.
-     * </p>
-     */
+    @FXML
+    private void onEditShowtime() {
+        ShowTime selected = showtimeTableView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.WARNING, "Please select a showtime to edit.").showAndWait();
+            return;
+        }
+        System.out.println("Edit showtime clicked: " + selected.getShowTimeID());
+        // TODO: open EditShowtime.fxml with selected showtime
+    }
+
+    @FXML
+    private void onDeleteShowtime() {
+        ShowTime selected = showtimeTableView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.WARNING, "Please select a showtime to delete.").showAndWait();
+            return;
+        }
+        DataStore.showTimes.remove(selected);
+        showtimeObservableList.remove(selected);
+        System.out.println("Deleted showtime: " + selected.getShowTimeID());
+    }
+
     @FXML
     private void onOpenMovieList() {
         System.out.println("Open movie list clicked.");
-        // TODO: open movieList.fxml
+        // TODO: open movie list view
     }
 
-    /**
-     * Handles deleting the selected showtime.
-     * <p>
-     * Deletes the showtime selected by the user.
-     * </p>
-     */
     @FXML
-    private void onDeleteShowtime() {
-        System.out.println("Delete showtime clicked.");
-        // TODO: delete selected showtime
+    private void onLogout() {
+        Stage s = (Stage) LogOutShowTimeMangerViewButton.getScene().getWindow();
+        s.close();
+        System.out.println("Logout clicked.");
     }
 }
