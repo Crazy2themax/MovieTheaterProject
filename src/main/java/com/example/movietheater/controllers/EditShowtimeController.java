@@ -46,7 +46,7 @@ public class EditShowtimeController {
 
     /** Button to cancel the editing process. */
     @FXML
-    private Button editShowTimeCancelButton;
+    private Button editShowtimeCancelButton;
 
     /** Button to browse for an image file. */
     @FXML
@@ -66,10 +66,11 @@ public class EditShowtimeController {
     private ShowTime currentShowtime;
     public void setShowTime(ShowTime showtime){
         this.currentShowtime = showtime;
-        editShowTimeMovieIDTextField.setText(toString().valueOf(showtime.getpMovieID()));
+
+        editShowTimeMovieIDTextField.setText(String.valueOf(showtime.getpMovieID()));
         editShowTimeRoonNumberTextField.setText(String.valueOf(showtime.getpRoomID()));
-        editShowTimeTimeTextField.setText(showtime.getpTime() != null? showtime.getpTime().toString() : "");
-        editShowTimeDateTextField.setText((showtime.getpDate()!=null? showtime.getpDate().toString() : ""));
+        editShowTimeTimeTextField.setText(showtime.getpTime() != null ? showtime.getpTime().toString() : "");
+        editShowTimeDateTextField.setText((showtime.getpDate()!= null ? showtime.getpDate().toString() : ""));
 }
 
     /**
@@ -80,7 +81,7 @@ public class EditShowtimeController {
      * </p>
      */
     @FXML
-    private void EditShowtimeSaveButton() {
+    private void onEditShowtimeSaveButtonClick() {
         try{
            int movieID = Integer.parseInt(editShowTimeMovieIDTextField.getText());
            int roomID = Integer.parseInt((editShowTimeRoonNumberTextField.getText()));
@@ -107,8 +108,8 @@ public class EditShowtimeController {
      * </p>
      */
     @FXML
-    private void EditShowtimeCancelButton() {
-        Stage s = (Stage) editShowTimeCancelButton.getScene().getWindow();
+    private void onEditShowtimeCancelButtonClick() {
+        Stage s = (Stage) editShowtimeCancelButton.getScene().getWindow();
         s.close();
     }
 }
