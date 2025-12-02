@@ -1,12 +1,14 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,30 +26,6 @@ public class LoginViewController
      */
     @FXML
     private TextField passwordTextPrompt;
-
-    /**
-     * Button to attempt a login, it fails if text fields are empty or have invalid inputs
-     */
-    @FXML
-    private Button loginButton;
-
-    /**
-     * Button to close application
-     */
-    @FXML
-    private Button exitButton;
-
-    /**
-     * Button to attempt a login as Manager, it fails if text fields are empty or have invalid inputs
-     */
-    @FXML
-    private Button managerLoginButton;
-
-    /**
-     * Button to go to the sign-up view.
-     */
-    @FXML
-    private Button signupButton;
 
     /**
      * Initializes the project
@@ -80,7 +58,7 @@ public class LoginViewController
      */
     public void OnExitButtonClick(ActionEvent event)
     {
-        Stage stage = (Stage) exitButton.getScene().getWindow();
+        Stage stage = (Stage) passwordTextPrompt.getScene().getWindow();
         stage.close();
     }
 
@@ -90,14 +68,17 @@ public class LoginViewController
      * @throws IOException
      */
     public void OnManagerButtonClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/showTime view.fxml"));
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("showTime view.fxml"));
         Parent rootNode = loader.load();
 
         LoginViewController controller = loader.getController();
 
         Stage stage = new Stage();
         stage.setScene(new Scene(rootNode));
-        stage.show();
+        stage.setTitle("Showtime View");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+        stage.showAndWait();
     }
 
     /**
