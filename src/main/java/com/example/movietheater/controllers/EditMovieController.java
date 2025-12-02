@@ -40,7 +40,7 @@ public class EditMovieController {
 
     /** Button to save the edited movie information. */
     @FXML
-    private Button EditMovieSaveButton;
+    private Button editMovieSaveButton;
 
     /** Button to cancel the edit operation. */
     @FXML
@@ -66,7 +66,7 @@ public class EditMovieController {
      * </p>
      */
     @FXML
-    private void EditMovieSaveButton() {
+    private void onEditMovieSaveButtonClick() {
         try {
             int newID = Integer.parseInt(editMovieIDTextField.getText().trim());
             String newTitle = editMovieTitleTextField.getText().trim();
@@ -81,7 +81,7 @@ public class EditMovieController {
             movie.setpTitle(newTitle);
             movie.setpDuration(newDuration);
 
-            Stage s = (Stage) EditMovieSaveButton.getScene().getWindow();
+            Stage s = (Stage) editMovieSaveButton.getScene().getWindow();
             s.close();
         } catch (NumberFormatException e) {
             showError("ID and Duration must be valid numbers.");
@@ -100,7 +100,7 @@ public class EditMovieController {
      * </p>
      */
     @FXML
-    private void EditMovieCancelButton() {
+    private void onEditMovieCancelButtonClick() {
         Stage s = (Stage) EditMovieCancelButton.getScene().getWindow();
         s.close();
     }

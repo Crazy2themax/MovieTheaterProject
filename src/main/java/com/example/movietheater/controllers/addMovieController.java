@@ -31,11 +31,11 @@ public class addMovieController {
 
     /** Button to save the movie information. */
     @FXML
-    private Button AddMovieSaveButton;
+    private Button addMovieSaveButton;
 
     /** Button to cancel adding a movie. */
     @FXML
-    private Button AddMovieCancelButton;
+    private Button addMovieCancelButton;
 
     /**
      * Initializes the controller.
@@ -57,7 +57,7 @@ public class addMovieController {
      * </p>
      */
     @FXML
-    private void AddMovieSaveButton() {
+    private void onAddMovieSaveButtonClick() {
         try {
             int id = Integer.parseInt(addMovieIDTextField.getText());
             String title = addMovieTitleTextField.getText();
@@ -71,7 +71,7 @@ public class addMovieController {
             Movie newMovie = new Movie(id, title, duration);
 
             //to close the window if everything worked well
-            Stage s = (Stage) AddMovieSaveButton.getScene().getWindow();
+            Stage s = (Stage) addMovieSaveButton.getScene().getWindow();
             s.close();
         }catch (Exception e) {
             new Alert(AlertType.ERROR,"Invalid ID or duration").showAndWait();
@@ -86,8 +86,8 @@ public class addMovieController {
      * </p>
      */
     @FXML
-    private void AddMovieCancelButton() {
-        Stage s = (Stage) AddMovieCancelButton.getScene().getWindow();
+    private void onAddMovieCancelButtonClick() {
+        Stage s = (Stage) addMovieCancelButton.getScene().getWindow();
         s.close();
     }
 }

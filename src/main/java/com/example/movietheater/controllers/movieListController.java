@@ -33,16 +33,7 @@ public class movieListController {
     private TableColumn<Movie, Integer> MovieDurationColumnMovieList;
 
     @FXML
-    private Button AddMovieMovieList;
-
-    @FXML
-    private Button EditMovieMovieList;
-
-    @FXML
-    private Button DeleteMovieMovieList;
-
-    @FXML
-    private Button BackButtonMovieList;
+    private Button backButton;
 
     @FXML
     private ObservableList<Movie> movieList = FXCollections.observableArrayList();
@@ -80,7 +71,7 @@ public class movieListController {
 
     /** Opens the AddMovie screen. */
     @FXML
-    private void AddMovieMovieList() {
+    private void onAddMovieMovieListClick() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/AddMovie.fxml"));
             Parent root = loader.load();
@@ -95,7 +86,7 @@ public class movieListController {
 
     /** Opens the EditMovie screen for the selected movie. */
     @FXML
-    private void EditMovieMovieList() {
+    private void onEditMovieMovieListClick() {
         Movie selected = movieTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
             new Alert(Alert.AlertType.WARNING, "Please select a movie to edit.").showAndWait();
@@ -120,7 +111,7 @@ public class movieListController {
 
     /** Deletes the selected movie from the list. */
     @FXML
-    private void DeleteMovieMovieList() {
+    private void onDeleteMovieMovieListClick() {
         Movie selected = movieTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
             new Alert(Alert.AlertType.WARNING, "Please select a movie to delete.").showAndWait();
@@ -131,10 +122,9 @@ public class movieListController {
         System.out.println("Deleted movie: " + selected.getpTitle());
     }
 
-    /** Closes the movie list window. */
     @FXML
-    private void BackButtonMovieList() {
-        Stage stage = (Stage) BackButtonMovieList.getScene().getWindow();
-        stage.close();
+    private void onBackButtonMovieListClick() {
+        Stage s = (Stage) backButton.getScene().getWindow();
+        s.close();
     }
 }
