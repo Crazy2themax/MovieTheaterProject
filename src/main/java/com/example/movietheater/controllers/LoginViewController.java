@@ -68,10 +68,10 @@ public class LoginViewController
      * @throws IOException
      */
     public void OnManagerButtonClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("showTime view.fxml"));
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("showTimeView.fxml"));
         Parent rootNode = loader.load();
 
-        LoginViewController controller = loader.getController();
+        showtimeViewController controller = loader.getController();
 
         Stage stage = new Stage();
         stage.setScene(new Scene(rootNode));
