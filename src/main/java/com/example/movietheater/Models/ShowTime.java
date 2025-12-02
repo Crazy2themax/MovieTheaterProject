@@ -24,8 +24,13 @@ public class ShowTime {
     /** The ID of the room where the showtime takes place. */
     private int aRoomID;
 
+    private String aTitle;
+    private int aDuration;
+
     /** The ID of the com.example.movietheater.Models.manager who created/owns this showtime. */
     private int aManagerID;
+
+
 
     /**
      * Constructs a com.example.movietheater.Models.ShowTime object with the given IDs.
@@ -65,6 +70,8 @@ public class ShowTime {
         this.aTime = time;
     }
 
+
+
     //getters
     public int getShowTimeID()
     {return aShowTimeID;}
@@ -74,9 +81,12 @@ public class ShowTime {
     public int getpManagerID() {return aManagerID;}
     public LocalDate getpDate() {return aDate;}
     public LocalTime getpTime() {return aTime;}
+    public String getpTitle() { return aTitle; }
+    public int getpDuration() { return aDuration; }
 
 
-    // Properties (setters)
+
+    // Properties (setters)=======================================>
     public void setpShowTimeID(int showTimeID) {
         this.aShowTimeID = showTimeID;
     }
@@ -100,6 +110,10 @@ public class ShowTime {
     public void setpManagerID(int managerID) {
         this.aManagerID = managerID;
     }
+    public void setpTitle(String movieTitle) { this.aTitle = movieTitle; }
+    public void setpDuration(int duration) { this.aDuration = duration; }
+
+
     @Override
     public String toString() {
         return "ShowTime ID: " + aShowTimeID + ", Movie ID: " + aMovieID + ", Room ID: " + aRoomID +

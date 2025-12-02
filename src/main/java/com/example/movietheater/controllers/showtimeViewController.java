@@ -49,8 +49,11 @@ public class showtimeViewController {
 
     private ObservableList<ShowTime> showtimeObservableList;
 
+
     @FXML
     public void initialize() {
+        showtimeObservableList = FXCollections.observableList(DataStore.showTimes);
+        showtimeTableView.setItems(showtimeObservableList);
 
         // Movie title column
         movieTitleColumn.setCellValueFactory(cellData -> {
@@ -88,9 +91,7 @@ public class showtimeViewController {
             ).asObject();
         });
 
-        // Load showtimes
-        showtimeObservableList = FXCollections.observableArrayList(DataStore.showTimes);
-        showtimeTableView.setItems(showtimeObservableList);
+
     }
 
 
