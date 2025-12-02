@@ -106,6 +106,22 @@ public class AddShowtimeController {
                 roomID,
                 1
         );
+        LocalTime newStart = time; // the time entered
+        LocalTime newEnd = time.plusMinutes(movie.getpDuration()); // add movie duration
+
+        for (ShowTime existing : DataStore.showTimes) {
+            if (existing.getpRoomID() == roomID && existing.getpDate().equals(date)) {
+                LocalTime existingStart = existing.getpTime();
+                LocalTime existingEnd = existing.getpTime().plusMinutes(existing.getpDuration());
+
+                boolean overlap = !newEnd.isBefore(existingStart) && !newStart.isAfter(existingEnd);
+                if (overlap) {
+                    showError("This room is already booked for that time.");
+                    return;
+                }
+            }
+        }
+
         newShowtime.setpTitle(movie.getpTitle());
         newShowtime.setpDuration(movie.getpDuration());
 
