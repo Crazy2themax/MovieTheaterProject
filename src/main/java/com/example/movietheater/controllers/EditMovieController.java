@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+
 
 /**
  * Controller class for the "Edit com.example.movietheater.Models.Movie" view.
@@ -65,13 +67,29 @@ public class EditMovieController {
      */
     @FXML
     private void EditMovieSaveButton() {
-        // validate & save updated movie
-        movie.setpMovieID(Integer.parseInt(editMovieIDTextField.getText()));
-        movie.setpTitle(editMovieTitleTextField.getText());
-        movie.setpDuration(Integer.parseInt(editMovieDurationTextField.getText()));
+        try {
+            int newID = Integer.parseInt(editMovieIDTextField.getText().trim());
+            String newTitle = editMovieTitleTextField.getText().trim();
+            int newDuration = Integer.parseInt(editMovieDurationTextField.getText().trim());
 
-        Stage s = (Stage) EditMovieSaveButton.getScene().getWindow();
-        s.close();
+            if (newTitle.isEmpty()) {
+                showError("Title cannot be empty.");
+                return;
+            }
+
+            movie.setpMovieID(newID);
+            movie.setpTitle(newTitle);
+            movie.setpDuration(newDuration);
+
+            Stage s = (Stage) EditMovieSaveButton.getScene().getWindow();
+            s.close();
+        } catch (NumberFormatException e) {
+            showError("ID and Duration must be valid numbers.");
+        }
+    }
+
+    private void showError(String msg) {
+        new Alert(Alert.AlertType.ERROR, msg).showAndWait();
     }
 
 
@@ -86,6 +104,5 @@ public class EditMovieController {
         Stage s = (Stage) EditMovieCancelButton.getScene().getWindow();
         s.close();
     }
-
 
 }

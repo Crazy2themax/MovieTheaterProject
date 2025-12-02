@@ -6,9 +6,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import com.example.movietheater.Models.Movie;
+import com.example.movietheater.Models.DataStore;
+
 
 /**
  * Controller class for the "Edit Showtime" view.
@@ -26,7 +29,7 @@ public class EditShowtimeController {
 
     /** TextField for editing the room number of the showtime. */
     @FXML
-    private TextField editShowTimeRoonNumberTextField;
+    private TextField editShowTimeRoomNumberTextField;
 
     /** TextField for editing the time of the showtime. */
     @FXML
@@ -36,21 +39,13 @@ public class EditShowtimeController {
     @FXML
     private TextField editShowTimeDateTextField;
 
-    /** TextField for displaying or editing the image file location. */
-    @FXML
-    private TextField editShowTimeImageLocationTextField;
-
     /** Button to save the edited showtime. */
     @FXML
-    private Button EditShowtimeSaveButton;
+    private Button editShowtimeSaveButton;
 
     /** Button to cancel the editing process. */
     @FXML
     private Button editShowtimeCancelButton;
-
-    /** Button to browse for an image file. */
-    @FXML
-    private Button EditShowtimeCancelButton;
 
     /**
      * Initializes the controller.
@@ -68,45 +63,123 @@ public class EditShowtimeController {
         this.currentShowtime = showtime;
 
         editShowTimeMovieIDTextField.setText(String.valueOf(showtime.getpMovieID()));
-        editShowTimeRoonNumberTextField.setText(String.valueOf(showtime.getpRoomID()));
+        editShowTimeRoomNumberTextField.setText(String.valueOf(showtime.getpRoomID()));
         editShowTimeTimeTextField.setText(showtime.getpTime() != null ? showtime.getpTime().toString() : "");
         editShowTimeDateTextField.setText((showtime.getpDate()!= null ? showtime.getpDate().toString() : ""));
 }
 
-    /**
-     * Handles saving the edited showtime.
-     * <p>
-     * Validates and saves the changes to the showtime.
-     * Currently prints a message to the console; extend this method to update the model.
-     * </p>
-     */
     @FXML
     private void onEditShowtimeSaveButtonClick() {
-        try{
-           int movieID = Integer.parseInt(editShowTimeMovieIDTextField.getText());
-           int roomID = Integer.parseInt((editShowTimeRoonNumberTextField.getText()));
-            LocalTime time = LocalTime.parse(editShowTimeTimeTextField.getText());
-            LocalDate date = LocalDate.parse(editShowTimeDateTextField.getText());
+        try {
+            String movieIdText = editShowTimeMovieIDTextField.getText().trim();
+            if (movieIdText.isEmpty()) {
+                showError("Movie ID cannot be empty.");
+                return;
+            }
+
+            int movieID;
+            try {
+                movieID = Integer.parseInt(movieIdText);
+            } catch (NumberFormatException e) {
+                showError("Movie ID must be a number.\nInvalid value: \"" + movieIdText + "\"");
+                return;
+            }
+
+            var movie = DataStore.getMovieById(movieID);
+            if (movie == null) {
+                showError("No movie found with ID: " + movieID);
+                return;
+            }
+
+            // Validate Room Number
+            String roomText = editShowTimeRoomNumberTextField.getText().trim();
+            if (roomText.isEmpty()) {
+                showError("Room Number cannot be empty.");
+                return;
+            }
+            int roomID;
+            try {
+                roomID = Integer.parseInt(roomText);
+            } catch (NumberFormatException e) {
+                showError("Room Number must be a number.\nInvalid value: \"" + roomText + "\"");
+                return;
+            }
+            if (roomID < 1 || roomID > 5) {
+                showError("Room number must be between 1 and 5.");
+                return;
+            }
+
+            String timeText = editShowTimeTimeTextField.getText().trim();
+            if (timeText.isEmpty()) {
+                showError("Time cannot be empty.");
+                return;
+            }
+
+            LocalTime time;
+            try {
+                time = LocalTime.parse(timeText);
+            } catch (Exception e) {
+                showError("Time must be in format HH:MM (e.g., 14:30).\nInvalid value: \"" + timeText + "\"");
+                return;
+            }
+
+            String dateText = editShowTimeDateTextField.getText().trim();
+            if (dateText.isEmpty()) {
+                showError("Date cannot be empty.");
+                return;
+            }
+
+            LocalDate date;
+            try {
+                date = LocalDate.parse(dateText);
+            } catch (Exception e) {
+                showError("Date must be in format YYYY-MM-DD.\nInvalid value: \"" + dateText + "\"");
+                return;
+            }
+
+            LocalTime newStart = time;
+            LocalTime newEnd = time.plusMinutes(movie.getpDuration());
+
+            for (ShowTime existing : DataStore.showTimes) {
+
+                // skip the current showtime so it doesn't conflict with itself
+                if (existing.getShowTimeID() == currentShowtime.getShowTimeID()) {
+                    continue;
+                }
+
+                if (existing.getpRoomID() == roomID && existing.getpDate().equals(date)) {
+                    LocalTime existingStart = existing.getpTime();
+                    LocalTime existingEnd = existing.getpTime().plusMinutes(existing.getpDuration());
+
+                    boolean overlap = !newEnd.isBefore(existingStart) && !newStart.isAfter(existingEnd);
+                    if (overlap) {
+                        showError("This room is already booked for that time.");
+                        return;
+                    }
+                }
+            }
+
             currentShowtime.setpMovieID(movieID);
             currentShowtime.setpRoomID(roomID);
-            currentShowtime.setTime(time);
-            currentShowtime.setDate(date);
+            currentShowtime.setpTime(time);
+            currentShowtime.setpDate(date);
+            currentShowtime.setpTitle(movie.getpTitle());
+            currentShowtime.setpDuration(movie.getpDuration());
 
-            Stage s = (Stage) EditShowtimeSaveButton.getScene().getWindow();
+            // Close window
+            Stage s = (Stage) editShowtimeSaveButton.getScene().getWindow();
             s.close();
-            System.out.println("Showtime edited: " + currentShowtime.getShowTimeID());
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR, "Something went wrong").showAndWait();
-        }
 
+        } catch (Exception e) {
+            showError("Unexpected error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Handles cancelling the edit showtime operation.
-     * <p>
-     * Closes the current window without saving changes.
-     * </p>
-     */
+    private void showError(String msg) {
+        new Alert(Alert.AlertType.ERROR, msg).showAndWait();
+    }
+
     @FXML
     private void onEditShowtimeCancelButtonClick() {
         Stage s = (Stage) editShowtimeCancelButton.getScene().getWindow();

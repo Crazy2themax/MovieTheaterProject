@@ -44,7 +44,7 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Button fx:id="LogOutShowTimeMangerViewButton" layoutX="599.0" layoutY="11.0" mnemonicParsing="false" onAction="#onShowTimeLogoutButtoClickn" text="Log Out" />
+      <Button fx:id="LogOutShowTimeMangerViewButton" layoutX="599.0" layoutY="11.0" mnemonicParsing="false" onAction="#onShowTimeLogoutButtonClick" text="Log Out" />
 
       <Button fx:id="editShowTimeMangerViewButton" layoutX="574.0" layoutY="97.0" mnemonicParsing="false" onAction="#onShowTimeEditButtonClick" text="Edit Showtime" />
       <Button fx:id="AddShowTimeMangerViewButton" layoutX="572.0" layoutY="152.0" mnemonicParsing="false" onAction="#onShowTimeAddButtonCLick" text="Add Showtime" />

@@ -54,7 +54,6 @@ public class AddShowtimeController {
             showError("No movie found with ID: " + movieID);
             return;
         }
-
         // Validate Room Number
         String roomText = addShowTimeRoomNumberTextField.getText().trim();
         if (roomText.isEmpty()) {
@@ -66,6 +65,10 @@ public class AddShowtimeController {
             roomID = Integer.parseInt(roomText);
         } catch (NumberFormatException e) {
             showError("Room Number must be a number.\nInvalid value: \"" + roomText + "\"");
+            return;
+        }
+        if (roomID < 1 || roomID > 5) {
+            showError("Room number must be between 1 and 5.");
             return;
         }
 
@@ -133,6 +136,8 @@ public class AddShowtimeController {
         System.out.println("Showtime added: " + newShowtime.getpDate() +
                 ", Movie: " + newShowtime.getpTitle() +
                 ", Duration: " + newShowtime.getpDuration());
+
+
     }
 
     private void showError(String msg) {
