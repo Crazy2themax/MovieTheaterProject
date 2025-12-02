@@ -1,12 +1,14 @@
 package com.example.movietheater.controllers;
 
 import com.example.movietheater.Models.Movie;
+import com.example.movietheater.Models.DataStore;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+
 
 /**
  * Controller class for the "Add com.example.movietheater.Models.Movie" view.
@@ -59,24 +61,34 @@ public class addMovieController {
     @FXML
     private void onAddMovieSaveButtonClick() {
         try {
-            int id = Integer.parseInt(addMovieIDTextField.getText());
-            String title = addMovieTitleTextField.getText();
-            int duration = Integer.parseInt(addMovieDurationTextField.getText());
+            int id = Integer.parseInt(addMovieIDTextField.getText().trim());
+            String title = addMovieTitleTextField.getText().trim();
+            int duration = Integer.parseInt(addMovieDurationTextField.getText().trim());
 
             if(title.isEmpty()){
                 new Alert(AlertType.WARNING,"Movie title cannot be empty").showAndWait();
                 return;
             }
-            //to add the movie to the list of movies
+
+            // Check if ID already exists
+            if (DataStore.getMovieById(id) != null) {
+                new Alert(AlertType.WARNING, "A movie with ID " + id + " already exists.").showAndWait();
+                return;
+            }
+
+            // Create the movie
             Movie newMovie = new Movie(id, title, duration);
 
-            //to close the window if everything worked well
+            // ADD THIS LINE - Actually add it to the DataStore!
+            DataStore.movieList.add(newMovie);
+
+            // Close the window
             Stage s = (Stage) addMovieSaveButton.getScene().getWindow();
             s.close();
-        }catch (Exception e) {
+
+        } catch (Exception e) {
             new Alert(AlertType.ERROR,"Invalid ID or duration").showAndWait();
         }
-
     }
 
     /**
