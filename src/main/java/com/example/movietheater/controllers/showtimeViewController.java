@@ -95,7 +95,7 @@ public class showtimeViewController {
 
 
     @FXML
-    private void onShowTimeAddButton() {
+    private void onShowTimeAddButtonCLick() {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/com/example/movietheater/AddShowtime.fxml")
@@ -114,7 +114,7 @@ public class showtimeViewController {
 
 
     @FXML
-    private void onShowTimeEditButton() {
+    private void onShowTimeEditButtonClick() {
         ShowTime selected = showtimeTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
             new Alert(Alert.AlertType.WARNING, "Please select a showtime to edit.").showAndWait();
@@ -142,7 +142,7 @@ public class showtimeViewController {
 
 
     @FXML
-    private void onShowTimeDeleteButton() {
+    private void onShowTimeDeleteButtonClick() {
         ShowTime selected = showtimeTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
             new Alert(Alert.AlertType.WARNING, "Please select a showtime to delete.").showAndWait();
@@ -155,7 +155,7 @@ public class showtimeViewController {
 
 
     @FXML
-    private void onShowTimeMovieListButton() {
+    private void onShowTimeMovieListButtonClick() {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/com/example/movietheater/MovieList.fxml")
@@ -174,7 +174,7 @@ public class showtimeViewController {
 
 
     @FXML
-    private void onShowTimeLogoutButton() {
+    private void onShowTimeLogoutButtoClickn() {
         Stage s = (Stage) ShowTimeLogoutButton.getScene().getWindow();
         s.close();
     }
