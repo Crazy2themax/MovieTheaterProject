@@ -38,11 +38,11 @@ public class EditMovieController {
 
     /** Button to save the edited movie information. */
     @FXML
-    private Button editMovieSaveButton;
+    private Button EditMovieSaveButton;
 
     /** Button to cancel the edit operation. */
     @FXML
-    private Button editMovieCancelButton;
+    private Button EditMovieCancelButton;
 
     /**
      * Initializes the controller.
@@ -64,13 +64,13 @@ public class EditMovieController {
      * </p>
      */
     @FXML
-    private void onSaveMovie() {
+    private void EditMovieSaveButton() {
         // validate & save updated movie
         movie.setpMovieID(Integer.parseInt(editMovieIDTextField.getText()));
         movie.setpTitle(editMovieTitleTextField.getText());
         movie.setpDuration(Integer.parseInt(editMovieDurationTextField.getText()));
 
-        Stage s = (Stage) editMovieSaveButton.getScene().getWindow();
+        Stage s = (Stage) EditMovieSaveButton.getScene().getWindow();
         s.close();
     }
 
@@ -82,8 +82,8 @@ public class EditMovieController {
      * </p>
      */
     @FXML
-    private void onCancel() {
-        Stage s = (Stage) editMovieCancelButton.getScene().getWindow();
+    private void EditMovieCancelButton() {
+        Stage s = (Stage) EditMovieCancelButton.getScene().getWindow();
         s.close();
     }
 

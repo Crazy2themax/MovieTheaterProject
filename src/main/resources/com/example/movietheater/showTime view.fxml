@@ -44,13 +44,13 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Button fx:id="LogOutShowTimeMangerViewButton" layoutX="440.0" layoutY="14.0" mnemonicParsing="false" text="Log Out" />
+      <Button fx:id="LogOutShowTimeMangerViewButton" layoutX="440.0" layoutY="14.0" mnemonicParsing="false" onAction="#ShowTimeLogoutButton" text="Log Out" />
 
-      <Button fx:id="editShowTimeMangerViewButton" layoutX="415.0" layoutY="100.0" mnemonicParsing="false" text="Edit Showtime" />
-      <Button fx:id="AddShowTimeMangerViewButton" layoutX="413.0" layoutY="155.0" mnemonicParsing="false" text="Add Showtime" />
-      <Button fx:id="movieListShowTimeMangerViewButton" layoutX="426.0" layoutY="331.0" mnemonicParsing="false" text="Movie List" />
-      <Button fx:id="DeleteShowTimeMangerViewButton" layoutX="407.0" layoutY="218.0" mnemonicParsing="false" text="Delete Showtime" />
-      <TableView editable="true" layoutY="40.0" prefHeight="370.0" prefWidth="374.0">
+      <Button fx:id="editShowTimeMangerViewButton" layoutX="415.0" layoutY="100.0" mnemonicParsing="false"  onAction="#ShowTimeEditButton" text="Edit Showtime" />
+      <Button fx:id="AddShowTimeMangerViewButton" layoutX="413.0" layoutY="155.0" mnemonicParsing="false" onAction="#ShowTimeAddButton" text="Add Showtime" />
+      <Button fx:id="movieListShowTimeMangerViewButton" layoutX="426.0" layoutY="331.0" mnemonicParsing="false" onAction="#ShowTimeMovieListButton" text="Movie List" />
+      <Button fx:id="DeleteShowTimeMangerViewButton" layoutX="407.0" layoutY="218.0" mnemonicParsing="false" onAction="#ShowTimeDeleteButton" text="Delete Showtime" />
+      <TableView fx:id="ShowtimeTableView" editable="true" layoutY="40.0" prefHeight="370.0" prefWidth="374.0">
         <columns>
           <TableColumn id="movieTitleColumn" prefWidth="128.7999849319458" text="Movie Title" />
           <TableColumn id="timeColumn" prefWidth="75.20001220703125" text="Time" />

@@ -32,16 +32,16 @@ public class movieListController {
     private TableColumn<Movie, Integer> MovieDurationColumnMovieList;
 
     @FXML
-    private Button addMovieButton;
+    private Button AddMovieMovieList;
 
     @FXML
-    private Button editMovieButton;
+    private Button EditMovieMovieList;
 
     @FXML
-    private Button DeleteMovieButton;
+    private Button DeleteMovieMovieList;
 
     @FXML
-    private Button backButton;
+    private Button BackButtonMovieList;
 
     @FXML
     private ObservableList<Movie> movieList = FXCollections.observableArrayList();
@@ -73,7 +73,7 @@ public class movieListController {
 
     /** Opens the AddMovie screen. */
     @FXML
-    private void onAddMovie() {
+    private void AddMovieMovieList() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/AddMovie.fxml"));
             Parent root = loader.load();
@@ -88,7 +88,7 @@ public class movieListController {
 
     /** Opens the EditMovie screen for the selected movie. */
     @FXML
-    private void onEditMovie() {
+    private void EditMovieMovieList() {
         Movie selected = movieTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
             new Alert(Alert.AlertType.WARNING, "Please select a movie to edit.").showAndWait();
@@ -113,7 +113,7 @@ public class movieListController {
 
     /** Deletes the selected movie from the list. */
     @FXML
-    private void onDeleteMovie() {
+    private void DeleteMovieMovieList() {
         Movie selected = movieTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
             new Alert(Alert.AlertType.WARNING, "Please select a movie to delete.").showAndWait();
@@ -126,8 +126,8 @@ public class movieListController {
 
     /** Closes the movie list window. */
     @FXML
-    private void onBack() {
-        Stage stage = (Stage) backButton.getScene().getWindow();
+    private void BackButtonMovieList() {
+        Stage stage = (Stage) BackButtonMovieList.getScene().getWindow();
         stage.close();
     }
 }

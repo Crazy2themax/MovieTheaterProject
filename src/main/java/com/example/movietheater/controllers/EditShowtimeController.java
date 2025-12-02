@@ -42,7 +42,7 @@ public class EditShowtimeController {
 
     /** Button to save the edited showtime. */
     @FXML
-    private Button editShowtimeSaveButton;
+    private Button EditShowtimeSaveButton;
 
     /** Button to cancel the editing process. */
     @FXML
@@ -50,7 +50,7 @@ public class EditShowtimeController {
 
     /** Button to browse for an image file. */
     @FXML
-    private Button editShowTimeBrowserButton;
+    private Button EditShowtimeCancelButton;
 
     /**
      * Initializes the controller.
@@ -64,7 +64,7 @@ public class EditShowtimeController {
         // preload selected showtime data into fields
     }
     private ShowTime currentShowtime;
-    public void setShowtime(ShowTime showtime){
+    public void setShowTime(ShowTime showtime){
         this.currentShowtime = showtime;
         editShowTimeMovieIDTextField.setText(toString().valueOf(showtime.getpMovieID()));
         editShowTimeRoonNumberTextField.setText(String.valueOf(showtime.getpRoomID()));
@@ -80,7 +80,7 @@ public class EditShowtimeController {
      * </p>
      */
     @FXML
-    private void onSaveEditShowtime() {
+    private void EditShowtimeSaveButton() {
         try{
            int movieID = Integer.parseInt(editShowTimeMovieIDTextField.getText());
            int roomID = Integer.parseInt((editShowTimeRoonNumberTextField.getText()));
@@ -91,7 +91,7 @@ public class EditShowtimeController {
             currentShowtime.setTime(time);
             currentShowtime.setDate(date);
 
-            Stage s = (Stage) editShowTimeCancelButton.getScene().getWindow();
+            Stage s = (Stage) EditShowtimeSaveButton.getScene().getWindow();
             s.close();
             System.out.println("Showtime edited: " + currentShowtime.getShowTimeID());
         }catch (Exception e){
@@ -107,7 +107,7 @@ public class EditShowtimeController {
      * </p>
      */
     @FXML
-    private void onCancel() {
+    private void EditShowtimeCancelButton() {
         Stage s = (Stage) editShowTimeCancelButton.getScene().getWindow();
         s.close();
     }

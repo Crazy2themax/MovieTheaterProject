@@ -42,15 +42,12 @@ public class addShowtimeController {
 
     /** Button to save the showtime information. */
     @FXML
-    private Button addShowtimeSaveButton;
+    private Button AddShowtimeSaveButton;
 
     /** Button to cancel adding a showtime. */
     @FXML
-    private Button addShowTimeCancelButton;
+    private Button AddShowtimeCancelButton;
 
-    /** Button to browse for an image file. */
-    @FXML
-    private Button addShowTimeBrowserButton;
 
     /**
      * Initializes the controller.
@@ -72,7 +69,7 @@ public class addShowtimeController {
      * </p>
      */
     @FXML
-    private void onSaveShowtime() {
+    private void AddShowtimeSaveButton() {
         try {
             int movieID = Integer.parseInt(addShowTimeDateTextField.getText());
             int roomID = Integer.parseInt(addShowTimeRoonNumberTextField.getText());
@@ -87,7 +84,7 @@ public class addShowtimeController {
             newShowtime.setTime(time);
 
             DataStore.showTimes.add(newShowtime);
-            Stage s = (Stage) addShowTimeCancelButton.getScene().getWindow();
+            Stage s = (Stage) AddShowtimeSaveButton.getScene().getWindow();
             s.close();
             System.out.println("Showtime added:" + newShowtime.getpDate());
         }catch (NumberFormatException e) {
@@ -102,8 +99,8 @@ public class addShowtimeController {
      * </p>
      */
     @FXML
-    private void onCancel() {
-        Stage s = (Stage) addShowTimeCancelButton.getScene().getWindow();
+    private void AddShowtimeCancelButton() {
+        Stage s = (Stage) AddShowtimeCancelButton.getScene().getWindow();
         s.close();
     }
 }
