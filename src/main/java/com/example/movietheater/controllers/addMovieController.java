@@ -61,33 +61,57 @@ public class addMovieController {
     @FXML
     private void onAddMovieSaveButtonClick() {
         try {
-            int id = Integer.parseInt(addMovieIDTextField.getText().trim());
+            // Get and trim inputs
+            String idText = addMovieIDTextField.getText().trim();
             String title = addMovieTitleTextField.getText().trim();
-            int duration = Integer.parseInt(addMovieDurationTextField.getText().trim());
+            String durationText = addMovieDurationTextField.getText().trim();
 
-            if(title.isEmpty()){
-                new Alert(AlertType.WARNING,"Movie title cannot be empty").showAndWait();
+            // Check if fields are empty
+            if (idText.isEmpty()) {
+                new Alert(AlertType.WARNING, "Movie ID cannot be empty.").showAndWait();
+                return;
+            }
+            if (title.isEmpty()) {
+                new Alert(AlertType.WARNING, "Movie title cannot be empty.").showAndWait();
+                return;
+            }
+            if (durationText.isEmpty()) {
+                new Alert(AlertType.WARNING, "Movie duration cannot be empty.").showAndWait();
+                return;
+            }
+
+            // Parse numbers
+            int id = Integer.parseInt(idText);
+            int duration = Integer.parseInt(durationText);
+
+            // Validate ID is positive
+            if (id <= 0) {
+                new Alert(AlertType.WARNING, "Movie ID must be a positive number.").showAndWait();
+                return;
+            }
+
+            // Validate duration is positive
+            if (duration <= 0) {
+                new Alert(AlertType.WARNING, "Duration must be a positive number.").showAndWait();
                 return;
             }
 
             // Check if ID already exists
             if (DataStore.getMovieById(id) != null) {
-                new Alert(AlertType.WARNING, "A movie with ID " + id + " already exists.").showAndWait();
+                new Alert(AlertType.ERROR, "A movie with ID " + id + " already exists.").showAndWait();
                 return;
             }
 
-            // Create the movie
+            // Create and add the movie
             Movie newMovie = new Movie(id, title, duration);
-
-            // ADD THIS LINE - Actually add it to the DataStore!
             DataStore.movieList.add(newMovie);
 
             // Close the window
             Stage s = (Stage) addMovieSaveButton.getScene().getWindow();
             s.close();
 
-        } catch (Exception e) {
-            new Alert(AlertType.ERROR,"Invalid ID or duration").showAndWait();
+        } catch (NumberFormatException e) {
+            new Alert(AlertType.ERROR, "ID and duration must be valid numbers.").showAndWait();
         }
     }
 
