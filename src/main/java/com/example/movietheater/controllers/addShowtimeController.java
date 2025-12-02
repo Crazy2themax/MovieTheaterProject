@@ -100,7 +100,7 @@ public class addShowtimeController {
      */
     @FXML
     private void AddShowtimeCancelButton() {
-        Stage s = (Stage) AddShowtimeCancelButton.getScene().getWindow();
-        s.close();
+        Stage stage = (Stage) AddShowtimeCancelButton.getScene().getWindow();
+        stage.close();
     }
 }
