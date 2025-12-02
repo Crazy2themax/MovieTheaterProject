@@ -1,8 +1,15 @@
 package com.example.movietheater.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class LoginViewController
 {
@@ -37,61 +44,74 @@ public class LoginViewController
     private Button managerLoginButton;
 
     /**
-     * Button to go to the sign up view.
+     * Button to go to the sign-up view.
      */
     @FXML
     private Button signupButton;
 
+    /**
+     * Initializes the project
+     */
     @FXML
     public void initialize()
     {
 
     }
 
-    public void onLoginButtonClick(ActionEvent event)
-    {
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
+    public void OnLoginButtonClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/ShowtimeListClient.fxml"));
         Parent rootNode = loader.load();
 
         showtimeViewController controller = loader.getController();
-        controller.setComposite(composite);
 
         Stage stage = new Stage();
-        stage.setTitle(composite.getName());
         stage.setScene(new Scene(rootNode));
         stage.show();
     }
 
-    public void onExitButtonClick(ActionEvent event)
+    /**
+     *
+     * @param event
+     */
+    public void OnExitButtonClick(ActionEvent event)
     {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
+        Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
 
-    public void onManagerButtonClick(ActionEvent event)
-    {
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
+    public void OnManagerButtonClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/showTime view.fxml"));
         Parent rootNode = loader.load();
 
         LoginViewController controller = loader.getController();
-        controller.setComposite(composite);
 
         Stage stage = new Stage();
-        stage.setTitle(composite.getName());
         stage.setScene(new Scene(rootNode));
         stage.show();
     }
 
-    public void onSignUpButtonClick(ActionEvent event)
-    {
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
+    public void OnSignUpButtonClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/SignUp.fxml"));
         Parent rootNode = loader.load();
 
-        SignUpViewController controller = loader.getController();
-        controller.setComposite(composite);
+        //SignUpViewController controller = loader.getController();
 
         Stage stage = new Stage();
-        stage.setTitle(composite.getName());
         stage.setScene(new Scene(rootNode));
         stage.show();
     }
