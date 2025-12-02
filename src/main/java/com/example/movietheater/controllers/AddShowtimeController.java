@@ -11,96 +11,137 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-/**
- * Controller class for the "Add Showtime" view.
- * <p>
- * This class handles the user interactions for adding a new showtime,
- * including movie ID, room number, time, date, and an optional image.
- * </p>
- */
-public class addShowtimeController {
+public class AddShowtimeController {
 
-    /** TextField for entering the movie ID. */
     @FXML
     private TextField addShowTimeMovieIDTextField;
 
-    /** TextField for entering the room number for the showtime. */
     @FXML
-    private TextField addShowTimeRoonNumberTextField;
+    private TextField addShowTimeRoomNumberTextField;
 
-    /** TextField for entering the time of the showtime. */
     @FXML
     private TextField addShowTimeTimeTextField;
 
-    /** TextField for entering the date of the showtime. */
     @FXML
     private TextField addShowTimeDateTextField;
 
-    /** TextField for entering or displaying the image file location. */
     @FXML
-    private TextField addShowTimeImageLocationTextField;
+    private Button addShowtimeSaveButton;
 
-    /** Button to save the showtime information. */
     @FXML
-    private Button AddShowtimeSaveButton;
+    private Button addShowTimeCancelButton;
 
-    /** Button to cancel adding a showtime. */
     @FXML
-    private Button AddShowtimeCancelButton;
+    private void onAddShowtimeSaveButtonClick() {
 
-
-    /**
-     * Initializes the controller.
-     * <p>
-     * Called automatically after the FXML file has been loaded.
-     * Can be used to initialize dropdowns, pickers, or other controls.
-     * </p>
-     */
-    @FXML
-    public void initialize() {
-        // initialize dropdowns/pickers if any
-    }
-
-    /**
-     * Handles saving a showtime.
-     * <p>
-     * Reads input from all text fields, prints the information to the console,
-     * and can be extended to validate and store the showtime in a model or list.
-     * </p>
-     */
-    @FXML
-    private void AddShowtimeSaveButton() {
-        try {
-            int movieID = Integer.parseInt(addShowTimeDateTextField.getText());
-            int roomID = Integer.parseInt(addShowTimeRoonNumberTextField.getText());
-            LocalTime time = LocalTime.parse(addShowTimeTimeTextField.getText());
-            LocalDate date = LocalDate.parse(addShowTimeDateTextField.getText());
-
-            ShowTime newShowtime = new ShowTime(
-                    DataStore.showTimes.size() + 1, date, time, movieID, roomID, 1
-            );
-
-            newShowtime.setDate(date);
-            newShowtime.setTime(time);
-
-            DataStore.showTimes.add(newShowtime);
-            Stage s = (Stage) AddShowtimeSaveButton.getScene().getWindow();
-            s.close();
-            System.out.println("Showtime added:" + newShowtime.getpDate());
-        }catch (NumberFormatException e) {
-            new Alert(Alert.AlertType.ERROR, "Invalid input. Check ID's , Time , and date format.").showAndWait();
+        // Validate Movie ID
+        String movieIdText = addShowTimeMovieIDTextField.getText().trim();
+        if (movieIdText.isEmpty()) {
+            showError("Movie ID cannot be empty.");
+            return;
         }
+        int movieID;
+        try {
+            movieID = Integer.parseInt(movieIdText);
+        } catch (NumberFormatException e) {
+            showError("Movie ID must be a number.\nInvalid value: \"" + movieIdText + "\"");
+            return;
+        }
+
+        // Lookup movie in DataStore
+        var movie = DataStore.getMovieById(movieID);
+        if (movie == null) {
+            showError("No movie found with ID: " + movieID);
+            return;
+        }
+
+        // Validate Room Number
+        String roomText = addShowTimeRoomNumberTextField.getText().trim();
+        if (roomText.isEmpty()) {
+            showError("Room Number cannot be empty.");
+            return;
+        }
+        int roomID;
+        try {
+            roomID = Integer.parseInt(roomText);
+        } catch (NumberFormatException e) {
+            showError("Room Number must be a number.\nInvalid value: \"" + roomText + "\"");
+            return;
+        }
+
+        // Validate Time
+        String timeText = addShowTimeTimeTextField.getText().trim();
+        if (timeText.isEmpty()) {
+            showError("Time cannot be empty.");
+            return;
+        }
+        LocalTime time;
+        try {
+            time = LocalTime.parse(timeText);
+        } catch (Exception e) {
+            showError("Time must be in format HH:MM (e.g., 14:30).\nInvalid value: \"" + timeText + "\"");
+            return;
+        }
+
+        // Validate Date
+        String dateText = addShowTimeDateTextField.getText().trim();
+        if (dateText.isEmpty()) {
+            showError("Date cannot be empty.");
+            return;
+        }
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateText);
+        } catch (Exception e) {
+            showError("Date must be in format YYYY-MM-DD (e.g., 2025-12-31).\nInvalid value: \"" + dateText + "\"");
+            return;
+        }
+
+        // Save Showtime and set movie title/duration
+        ShowTime newShowtime = new ShowTime(
+                DataStore.showTimes.size() + 1,
+                date,
+                time,
+                movieID,
+                roomID,
+                1
+        );
+        LocalTime newStart = time; // the time entered
+        LocalTime newEnd = time.plusMinutes(movie.getpDuration()); // add movie duration
+
+        for (ShowTime existing : DataStore.showTimes) {
+            if (existing.getpRoomID() == roomID && existing.getpDate().equals(date)) {
+                LocalTime existingStart = existing.getpTime();
+                LocalTime existingEnd = existing.getpTime().plusMinutes(existing.getpDuration());
+
+                boolean overlap = !newEnd.isBefore(existingStart) && !newStart.isAfter(existingEnd);
+                if (overlap) {
+                    showError("This room is already booked for that time.");
+                    return;
+                }
+            }
+        }
+
+        newShowtime.setpTitle(movie.getpTitle());
+        newShowtime.setpDuration(movie.getpDuration());
+
+        DataStore.showTimes.add(newShowtime);
+
+        // Close window
+        ((Stage) addShowtimeSaveButton.getScene().getWindow()).close();
+
+        System.out.println("Showtime added: " + newShowtime.getpDate() +
+                ", Movie: " + newShowtime.getpTitle() +
+                ", Duration: " + newShowtime.getpDuration());
     }
 
-    /**
-     * Handles cancelling the add showtime operation.
-     * <p>
-     * Closes the current window without saving any data.
-     * </p>
-     */
+    private void showError(String msg) {
+        new Alert(Alert.AlertType.ERROR, msg).showAndWait();
+    }
+
     @FXML
-    private void AddShowtimeCancelButton() {
-        Stage stage = (Stage) AddShowtimeCancelButton.getScene().getWindow();
-        stage.close();
+    private void onAddShowtimeCancelButtonClick() {
+        Stage s = (Stage) addShowTimeCancelButton.getScene().getWindow();
+        s.close();
     }
 }
