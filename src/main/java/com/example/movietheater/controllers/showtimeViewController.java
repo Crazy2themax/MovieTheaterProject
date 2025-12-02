@@ -39,6 +39,9 @@ public class showtimeViewController {
     private TableColumn<ShowTime, String> movieTitleColumn;
 
     @FXML
+    private TableColumn<ShowTime, Integer> roomColumn;
+
+    @FXML
     private TableColumn<ShowTime, String> timeColumn;
 
     @FXML
@@ -62,6 +65,12 @@ public class showtimeViewController {
                     m != null ? m.getpTitle() : "Unknown"
             );
         });
+
+        // room column
+        roomColumn.setCellValueFactory(cellData ->
+                        new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getpRoomID()).asObject()
+        );
+
 
         // Time column
         timeColumn.setCellValueFactory(cellData -> {

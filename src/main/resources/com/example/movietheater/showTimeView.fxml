@@ -53,11 +53,11 @@
       <TableView fx:id="showtimeTableView" editable="true" layoutX="24.0" layoutY="55.0" prefHeight="370.0" prefWidth="530.0">
         <columns>
           <TableColumn fx:id="movieTitleColumn" prefWidth="128.7999849319458" text="Movie Title" />
-            <TableColumn fx:id="timeColumn1" prefWidth="75.20001220703125" text="Room" />
+            <TableColumn fx:id="roomColumn" prefWidth="75.20001220703125" text="Room" />
             <TableColumn fx:id="durationColumn" prefWidth="90.39998779296877" text="Duration" />
           <TableColumn fx:id="timeColumn" prefWidth="75.20001220703125" text="Time" />
             <TableColumn fx:id="dateColumn" prefWidth="78.40000915527344" text="date" />
-            <TableColumn fx:id="dateColumn1" prefWidth="78.40000915527344" text="Manager" />
+            <TableColumn fx:id="managerColumn" prefWidth="78.40000915527344" text="Manager" />
         </columns>
       </TableView>
    </children>
