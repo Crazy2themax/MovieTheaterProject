@@ -20,6 +20,7 @@ public class Movie {
     /** The duration of the movie in minutes. */
     private int aDuration;
 
+
     public Movie (int movieID, String title, int duration) {
         this.aMovieID = movieID;
         this.aTitle = title;

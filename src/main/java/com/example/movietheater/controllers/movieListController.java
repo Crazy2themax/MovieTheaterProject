@@ -1,5 +1,6 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.Models.DataStore;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -52,24 +53,30 @@ public class movieListController {
      */
     @FXML
     public void initialize() {
-        MovieIDColumnMovieList.setCellValueFactory(
-                cellData -> new SimpleIntegerProperty(cellData.getValue().getpMovieID()).asObject()
-        );
-        MovieTitleColumnMovieList.setCellValueFactory(
-                cellData -> new SimpleStringProperty(cellData.getValue().getpTitle())
-        );
-        MovieDurationColumnMovieList.setCellValueFactory(
-                cellData -> new SimpleIntegerProperty(cellData.getValue().getpDuration()).asObject()
+        // Populate DataStore.movieList only if empty
+            if (DataStore.movieList.isEmpty()) {
+                DataStore.movieList.addAll(
+                        new Movie(1, "Moana", 107),
+                        new Movie(2, "Avengers Endgame", 181),
+                        new Movie(3, "Hangover", 100)
+                );
+            }
 
-        );
+            // Set up table
+            MovieIDColumnMovieList.setCellValueFactory(
+                    cellData -> new SimpleIntegerProperty(cellData.getValue().getpMovieID()).asObject()
+            );
+            MovieTitleColumnMovieList.setCellValueFactory(
+                    cellData -> new SimpleStringProperty(cellData.getValue().getpTitle())
+            );
+            MovieDurationColumnMovieList.setCellValueFactory(
+                    cellData -> new SimpleIntegerProperty(cellData.getValue().getpDuration()).asObject()
+            );
 
-        movieList.addAll(
-                new Movie(1, "Moana", 107),
-                new Movie(2, "Avengers Endgame", 181),
-                new Movie(3, "Hangover", 100)
-        );
-        movieTableView.setItems(movieList);
-    }
+            movieTableView.setItems(DataStore.movieList); // Use DataStore.movieList
+        }
+
+
 
     /** Opens the AddMovie screen. */
     @FXML
