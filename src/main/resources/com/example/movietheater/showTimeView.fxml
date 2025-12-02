@@ -38,24 +38,26 @@
         - Button DeleteShowTimeMangerViewButton: Deletes selected showtime
 -->
 
-<AnchorPane prefHeight="415.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movietheater.controllers.showtimeViewController">
+<AnchorPane prefHeight="495.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movietheater.controllers.showtimeViewController">
    <children>
       <Label layoutX="14.0" layoutY="11.0" prefHeight="30.0" prefWidth="257.0" text="ShowTimes (Manager View) ">
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Button fx:id="LogOutShowTimeMangerViewButton" layoutX="440.0" layoutY="14.0" mnemonicParsing="false" onAction="#onShowTimeLogoutButtoClickn" text="Log Out" />
+      <Button fx:id="LogOutShowTimeMangerViewButton" layoutX="599.0" layoutY="11.0" mnemonicParsing="false" onAction="#onShowTimeLogoutButtoClickn" text="Log Out" />
 
-      <Button fx:id="editShowTimeMangerViewButton" layoutX="415.0" layoutY="100.0" mnemonicParsing="false"  onAction="#onShowTimeEditButtonClick" text="Edit Showtime" />
-      <Button fx:id="AddShowTimeMangerViewButton" layoutX="413.0" layoutY="155.0" mnemonicParsing="false" onAction="#onShowTimeAddButtonCLick" text="Add Showtime" />
-      <Button fx:id="movieListShowTimeMangerViewButton" layoutX="426.0" layoutY="331.0" mnemonicParsing="false" onAction="#onShowTimeMovieListButtonClick" text="Movie List" />
-      <Button fx:id="DeleteShowTimeMangerViewButton" layoutX="407.0" layoutY="218.0" mnemonicParsing="false" onAction="#onShowTimeDeleteButtonClick" text="Delete Showtime" />
-      <TableView fx:id="showtimeTableView" editable="true" layoutY="40.0" prefHeight="370.0" prefWidth="374.0">
+      <Button fx:id="editShowTimeMangerViewButton" layoutX="574.0" layoutY="97.0" mnemonicParsing="false" onAction="#onShowTimeEditButtonClick" text="Edit Showtime" />
+      <Button fx:id="AddShowTimeMangerViewButton" layoutX="572.0" layoutY="152.0" mnemonicParsing="false" onAction="#onShowTimeAddButtonCLick" text="Add Showtime" />
+      <Button fx:id="movieListShowTimeMangerViewButton" layoutX="585.0" layoutY="328.0" mnemonicParsing="false" onAction="#onShowTimeMovieListButtonClick" text="Movie List" />
+      <Button fx:id="DeleteShowTimeMangerViewButton" layoutX="566.0" layoutY="215.0" mnemonicParsing="false" onAction="#onShowTimeDeleteButtonClick" text="Delete Showtime" />
+      <TableView fx:id="showtimeTableView" editable="true" layoutX="24.0" layoutY="55.0" prefHeight="370.0" prefWidth="530.0">
         <columns>
           <TableColumn fx:id="movieTitleColumn" prefWidth="128.7999849319458" text="Movie Title" />
+            <TableColumn fx:id="timeColumn1" prefWidth="75.20001220703125" text="Room" />
+            <TableColumn fx:id="durationColumn" prefWidth="90.39998779296877" text="Duration" />
           <TableColumn fx:id="timeColumn" prefWidth="75.20001220703125" text="Time" />
             <TableColumn fx:id="dateColumn" prefWidth="78.40000915527344" text="date" />
-            <TableColumn fx:id="durationColumn" prefWidth="90.39998779296877" text="Duration" />
+            <TableColumn fx:id="dateColumn1" prefWidth="78.40000915527344" text="Manager" />
         </columns>
       </TableView>
    </children>
