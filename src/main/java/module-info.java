@@ -9,4 +9,5 @@ module com.example.movietheater {
     exports com.example.movietheater.controllers;
     opens com.example.movietheater.Models to javafx.fxml;
     exports com.example.movietheater.Models;
+
 }

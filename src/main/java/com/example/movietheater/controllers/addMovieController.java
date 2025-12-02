@@ -1,9 +1,12 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.Models.Movie;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Controller class for the "Add com.example.movietheater.Models.Movie" view.
@@ -28,11 +31,11 @@ public class addMovieController {
 
     /** Button to save the movie information. */
     @FXML
-    private Button addMovieSaveButton;
+    private Button AddMovieSaveButton;
 
     /** Button to cancel adding a movie. */
     @FXML
-    private Button addMoveiCancelButton;
+    private Button AddMovieCancelButton;
 
     /**
      * Initializes the controller.
@@ -54,12 +57,26 @@ public class addMovieController {
      * </p>
      */
     @FXML
-    private void onSaveMovie() {
-        String id = addMovieIDTextField.getText();
-        String title = addMovieTitleTextField.getText();
-        String duration = addMovieDurationTextField.getText();
-        System.out.println("Saving movie: " + id + " - " + title + " (" + duration + ")");
-        // TODO: validate & add to list/model
+    private void AddMovieSaveButton() {
+        try {
+            int id = Integer.parseInt(addMovieIDTextField.getText());
+            String title = addMovieTitleTextField.getText();
+            int duration = Integer.parseInt(addMovieDurationTextField.getText());
+
+            if(title.isEmpty()){
+                new Alert(AlertType.WARNING,"Movie title cannot be empty").showAndWait();
+                return;
+            }
+            //to add the movie to the list of movies
+            Movie newMovie = new Movie(id, title, duration);
+
+            //to close the window if everything worked well
+            Stage s = (Stage) AddMovieSaveButton.getScene().getWindow();
+            s.close();
+        }catch (Exception e) {
+            new Alert(AlertType.ERROR,"Invalid ID or duration").showAndWait();
+        }
+
     }
 
     /**
@@ -69,8 +86,8 @@ public class addMovieController {
      * </p>
      */
     @FXML
-    private void onCancel() {
-        Stage s = (Stage) addMoveiCancelButton.getScene().getWindow();
+    private void AddMovieCancelButton() {
+        Stage s = (Stage) AddMovieCancelButton.getScene().getWindow();
         s.close();
     }
 }

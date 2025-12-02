@@ -1,108 +1,133 @@
 package com.example.movietheater.controllers;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import com.example.movietheater.Models.Movie;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 /**
- * Controller class for the "com.example.movietheater.Models.Movie List" view.
- * <p>
- * Handles displaying the list of movies and provides functionality to add,
- * edit, or delete movies. Also allows navigating back to the previous screen.
- * </p>
+ * Controller class for the Movie List view.
+ * Handles displaying, adding, editing, and deleting movies.
  */
 public class movieListController {
 
-    /** ListView displaying the movies. Replace '?' with the com.example.movietheater.Models.Movie model when available. */
     @FXML
-    private ListView<?> movieListView;
+    private TableView<Movie> movieTableView;
 
-    /** Button to open the Add com.example.movietheater.Models.Movie screen. */
     @FXML
-    private Button addMovieButton;
+    private TableColumn<Movie, Integer> MovieIDColumnMovieList;
 
-    /** Button to edit the selected movie. */
     @FXML
-    private Button editMovieButton;
+    private TableColumn<Movie, String> MovieTitleColumnMovieList;
 
-    /** Button to delete the selected movie. */
     @FXML
-    private Button DeleteMovieButton;
+    private TableColumn<Movie, Integer> MovieDurationColumnMovieList;
 
-    /** Button to go back to the previous screen. */
     @FXML
-    private Button backButton;
+    private Button AddMovieMovieList;
+
+    @FXML
+    private Button EditMovieMovieList;
+
+    @FXML
+    private Button DeleteMovieMovieList;
+
+    @FXML
+    private Button BackButtonMovieList;
+
+    @FXML
+    private ObservableList<Movie> movieList = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller.
-     * <p>
-     * Loads movies into the ListView when the view is initialized.
-     * </p>
+     * Loads sample movies into the ListView.
      */
     @FXML
     public void initialize() {
-        // load movies into movieListView
+        MovieIDColumnMovieList.setCellValueFactory(
+                cellData -> new SimpleIntegerProperty(cellData.getValue().getpMovieID()).asObject()
+        );
+        MovieTitleColumnMovieList.setCellValueFactory(
+                cellData -> new SimpleStringProperty(cellData.getValue().getpTitle())
+        );
+        MovieDurationColumnMovieList.setCellValueFactory(
+                cellData -> new SimpleIntegerProperty(cellData.getValue().getpDuration()).asObject()
+
+        );
+
+        movieList.addAll(
+                new Movie(1, "Moana", 107),
+                new Movie(2, "Avengers Endgame", 181),
+                new Movie(3, "Hangover", 100)
+        );
+        movieTableView.setItems(movieList);
     }
 
-    /**
-     * Opens the Add com.example.movietheater.Models.Movie view.
-     */
+    /** Opens the AddMovie screen. */
     @FXML
-    private void onAddMovie() {
-        System.out.println("Open Add com.example.movietheater.Models.Movie screen.");
-        // open AddMovie view
+    private void AddMovieMovieList() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/AddMovie.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Add Movie");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Handles editing the selected movie.
-     * <p>
-     * If no movie is selected, shows a warning alert.
-     * Otherwise, opens the edit movie view for the selected movie.
-     * </p>
-     */
+    /** Opens the EditMovie screen for the selected movie. */
     @FXML
-    private void onEditMovie() {
-        Object selected = movieListView.getSelectionModel().getSelectedItem();
+    private void EditMovieMovieList() {
+        Movie selected = movieTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            Alert a = new Alert(AlertType.WARNING, "Please select a movie to edit.");
-            a.showAndWait();
+            new Alert(Alert.AlertType.WARNING, "Please select a movie to edit.").showAndWait();
             return;
         }
-        System.out.println("Edit movie: " + selected);
-        // get selected and open edit view
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/EditMovie.fxml"));
+            Parent root = loader.load();
+
+            EditMovieController controller = loader.getController();
+            controller.setMovie(selected); // pass selected movie to edit form
+
+            Stage stage = new Stage();
+            stage.setTitle("Edit Movie");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Handles deleting the selected movie.
-     * <p>
-     * If no movie is selected, shows a warning alert.
-     * Otherwise, confirms and deletes the movie from the model/list.
-     * </p>
-     */
+    /** Deletes the selected movie from the list. */
     @FXML
-    private void onDeleteMovie() {
-        Object selected = movieListView.getSelectionModel().getSelectedItem();
+    private void DeleteMovieMovieList() {
+        Movie selected = movieTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            Alert a = new Alert(AlertType.WARNING, "Please select a movie to delete.");
-            a.showAndWait();
+            new Alert(Alert.AlertType.WARNING, "Please select a movie to delete.").showAndWait();
             return;
         }
-        System.out.println("Delete movie: " + selected);
-        // TODO: confirm and delete from model/list
+
+        movieTableView.getItems().remove(selected);
+        System.out.println("Deleted movie: " + selected.getpTitle());
     }
 
-    /**
-     * Handles navigating back to the previous screen.
-     * <p>
-     * Closes the current stage/window.
-     * </p>
-     */
+    /** Closes the movie list window. */
     @FXML
-    private void onBack() {
-        Stage s = (Stage) backButton.getScene().getWindow();
-        s.close();
+    private void BackButtonMovieList() {
+        Stage stage = (Stage) BackButtonMovieList.getScene().getWindow();
+        stage.close();
     }
 }

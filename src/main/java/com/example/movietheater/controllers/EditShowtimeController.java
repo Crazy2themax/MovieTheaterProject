@@ -1,11 +1,14 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.Models.ShowTime;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import java.io.File;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Controller class for the "Edit Showtime" view.
@@ -39,7 +42,7 @@ public class EditShowtimeController {
 
     /** Button to save the edited showtime. */
     @FXML
-    private Button editShowtimeSaveButton;
+    private Button EditShowtimeSaveButton;
 
     /** Button to cancel the editing process. */
     @FXML
@@ -47,7 +50,7 @@ public class EditShowtimeController {
 
     /** Button to browse for an image file. */
     @FXML
-    private Button editShowTimeBrowserButton;
+    private Button EditShowtimeCancelButton;
 
     /**
      * Initializes the controller.
@@ -60,6 +63,14 @@ public class EditShowtimeController {
     public void initialize() {
         // preload selected showtime data into fields
     }
+    private ShowTime currentShowtime;
+    public void setShowTime(ShowTime showtime){
+        this.currentShowtime = showtime;
+        editShowTimeMovieIDTextField.setText(toString().valueOf(showtime.getpMovieID()));
+        editShowTimeRoonNumberTextField.setText(String.valueOf(showtime.getpRoomID()));
+        editShowTimeTimeTextField.setText(showtime.getpTime() != null? showtime.getpTime().toString() : "");
+        editShowTimeDateTextField.setText((showtime.getpDate()!=null? showtime.getpDate().toString() : ""));
+}
 
     /**
      * Handles saving the edited showtime.
@@ -69,9 +80,24 @@ public class EditShowtimeController {
      * </p>
      */
     @FXML
-    private void onSaveEditShowtime() {
-        // validate & save changes
-        System.out.println("Save showtime edits.");
+    private void EditShowtimeSaveButton() {
+        try{
+           int movieID = Integer.parseInt(editShowTimeMovieIDTextField.getText());
+           int roomID = Integer.parseInt((editShowTimeRoonNumberTextField.getText()));
+            LocalTime time = LocalTime.parse(editShowTimeTimeTextField.getText());
+            LocalDate date = LocalDate.parse(editShowTimeDateTextField.getText());
+            currentShowtime.setpMovieID(movieID);
+            currentShowtime.setpRoomID(roomID);
+            currentShowtime.setTime(time);
+            currentShowtime.setDate(date);
+
+            Stage s = (Stage) EditShowtimeSaveButton.getScene().getWindow();
+            s.close();
+            System.out.println("Showtime edited: " + currentShowtime.getShowTimeID());
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR, "Something went wrong").showAndWait();
+        }
+
     }
 
     /**
@@ -81,30 +107,8 @@ public class EditShowtimeController {
      * </p>
      */
     @FXML
-    private void onCancel() {
+    private void EditShowtimeCancelButton() {
         Stage s = (Stage) editShowTimeCancelButton.getScene().getWindow();
         s.close();
-    }
-
-    /**
-     * Handles browsing for a new image file for the showtime.
-     * <p>
-     * Opens a FileChooser dialog allowing the user to select an image.
-     * Updates the image location text field with the selected file path.
-     * </p>
-     */
-    @FXML
-    private void onBrowseImage() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select com.example.movietheater.Models.Movie Image");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
-        );
-        Stage s = (Stage) editShowTimeBrowserButton.getScene().getWindow();
-        File sel = fileChooser.showOpenDialog(s);
-        if (sel != null) {
-            editShowTimeImageLocationTextField.setText(sel.getAbsolutePath());
-            System.out.println("Selected image: " + sel.getAbsolutePath());
-        }
     }
 }

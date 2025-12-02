@@ -1,5 +1,6 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.Models.Movie;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -15,6 +16,14 @@ import javafx.stage.Stage;
  */
 public class EditMovieController {
 
+    private Movie movie;
+
+    public void setMovie(Movie aMovie) {
+        this.movie = aMovie;
+        editMovieIDTextField.setText(String.valueOf(movie.getpMovieID()));
+        editMovieTitleTextField.setText(movie.getpTitle());
+        editMovieDurationTextField.setText(String.valueOf(movie.getpDuration()));
+    }
     /** TextField for editing the movie ID. */
     @FXML
     private TextField editMovieIDTextField;
@@ -29,11 +38,11 @@ public class EditMovieController {
 
     /** Button to save the edited movie information. */
     @FXML
-    private Button editMovieSaveButton;
+    private Button EditMovieSaveButton;
 
     /** Button to cancel the edit operation. */
     @FXML
-    private Button editMovieCancelButton;
+    private Button EditMovieCancelButton;
 
     /**
      * Initializes the controller.
@@ -55,10 +64,16 @@ public class EditMovieController {
      * </p>
      */
     @FXML
-    private void onSaveMovie() {
+    private void EditMovieSaveButton() {
         // validate & save updated movie
-        System.out.println("com.example.movietheater.Models.Movie saved.");
+        movie.setpMovieID(Integer.parseInt(editMovieIDTextField.getText()));
+        movie.setpTitle(editMovieTitleTextField.getText());
+        movie.setpDuration(Integer.parseInt(editMovieDurationTextField.getText()));
+
+        Stage s = (Stage) EditMovieSaveButton.getScene().getWindow();
+        s.close();
     }
+
 
     /**
      * Handles cancelling the edit operation.
@@ -67,8 +82,10 @@ public class EditMovieController {
      * </p>
      */
     @FXML
-    private void onCancel() {
-        Stage s = (Stage) editMovieCancelButton.getScene().getWindow();
+    private void EditMovieCancelButton() {
+        Stage s = (Stage) EditMovieCancelButton.getScene().getWindow();
         s.close();
     }
+
+
 }
