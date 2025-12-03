@@ -4,13 +4,26 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Represents a scheduled showtime for a movie.
- * Contains information about the showtime's ID, date, time, associated movie, room, and com.example.movietheater.Models.manager.
+ * Represents a scheduled showtime for a movie in a specific room.
+ * <p>
+ * A showtime combines a movie, a show room, a date, and a time.
+ * It automatically retrieves and stores the movie's title and duration
+ * for convenient access without repeated lookups.
+ * </p>
+ *
+ * @author Movie Theater Application
+ * @version 1.0
  */
 public class ShowTime {
 
     /** The unique identifier for this showtime. */
     private int aShowTimeID;
+
+    /** The ID of the movie being shown. */
+    private int aMovieID;
+
+    /** The show room where the movie will be shown. */
+    private ShowRoom aRoom;
 
     /** The date of the showtime. */
     private LocalDate aDate;
@@ -18,110 +31,162 @@ public class ShowTime {
     /** The time of the showtime. */
     private LocalTime aTime;
 
-    /** The ID of the movie being shown. */
-    private int aMovieID;
-
-    /** The ID of the room where the showtime takes place. */
-    private int aRoomID;
-
+    /** The title of the movie (cached from movie data). */
     private String aTitle;
+
+    /** The duration of the movie in minutes (cached from movie data). */
     private int aDuration;
 
-    /** The ID of the com.example.movietheater.Models.manager who created/owns this showtime. */
-    private int aManagerID;
-
-
-
-
     /**
-     * Constructs a com.example.movietheater.Models.ShowTime object with the given IDs.
-     * The date and time are initialized as null and can be set later.
+     * Constructs a new ShowTime with the specified details.
+     * <p>
+     * Automatically retrieves the movie title from the DataStore based on the movie ID.
+     * </p>
      *
-     * @param showTimeID the unique identifier of the showtime
-     * @param date the date of the showtime (currently ignored, initialized as null)
-     * @param time the time of the showtime (currently ignored, initialized as null)
-     * @param movieID the ID of the movie
-     * @param roomID the ID of the room
-     * @param managerID the ID of the com.example.movietheater.Models.manager
+     * @param pShowTimeID the unique identifier for this showtime
+     * @param pDate the date of the showtime
+     * @param pTime the time of the showtime
+     * @param pMovieID the ID of the movie being shown
+     * @param pRoomID the ID of the show room
+     * @param pDuration the duration of the movie in minutes
      */
-    public ShowTime(int showTimeID, LocalDate date, LocalTime time, int movieID, int roomID, int managerID) {
-        this.aShowTimeID = showTimeID;
-        this.aMovieID = movieID;
-        this.aRoomID = roomID;
-        this.aManagerID = managerID;
-        this.aDate = date;
-        this.aTime = time;
-    }
+    public ShowTime(int pShowTimeID, LocalDate pDate, LocalTime pTime,
+                    int pMovieID, int pRoomID, int pDuration) {
+        this.aShowTimeID = pShowTimeID;
+        this.aMovieID = pMovieID;
+        this.aRoom = new ShowRoom(pRoomID);
+        this.aDate = pDate;
+        this.aTime = pTime;
+        this.aDuration = pDuration;
 
-    /**
-     * Sets the date of the showtime.
-     *
-     * @param date the date to set
-     */
-    public void setDate(LocalDate date) {
-        this.aDate = date;
+        Movie movie = DataStore.getMovieById(pMovieID);
+        this.aTitle = (movie != null) ? movie.getpTitle() : "";
     }
 
     /**
-     * Sets the time of the showtime.
+     * Gets the showtime ID.
      *
-     * @param time the time to set
+     * @return the unique identifier of this showtime
      */
-    public void setTime(LocalTime time) {
-        this.aTime = time;
+    public int getaShowTimeID() {
+        return this.aShowTimeID;
     }
 
-
-
-    //getters
-    public int getShowTimeID()
-    {return aShowTimeID;}
-
-    public int getpMovieID() {return aMovieID;}
-    public int getpRoomID() {return aRoomID;}
-    public int getpManagerID() {return aManagerID;}
-    public LocalDate getpDate() {return aDate;}
-    public LocalTime getpTime() {return aTime;}
-    public String getpTitle() { return aTitle; }
-    public int getpDuration() { return aDuration; }
-
-
-
-    // Properties (setters)=======================================>
-    public void setpShowTimeID(int showTimeID) {
-        this.aShowTimeID = showTimeID;
+    /**
+     * Gets the movie ID.
+     *
+     * @return the ID of the movie being shown
+     */
+    public int getpMovieID() {
+        return this.aMovieID;
     }
 
-    public void setpDate(LocalDate date) {
-        this.aDate = date;
+    /**
+     * Gets the room ID.
+     *
+     * @return the ID of the show room
+     */
+    public int getpRoomID() {
+        return this.aRoom.getpRoomID();
     }
 
-    public void setpTime(LocalTime time) {
-        this.aTime = time;
+    /**
+     * Gets the showtime date.
+     *
+     * @return the date of this showtime
+     */
+    public LocalDate getpDate() {
+        return this.aDate;
     }
 
-    public void setpMovieID(int movieID) {
-        this.aMovieID = movieID;
+    /**
+     * Gets the showtime time.
+     *
+     * @return the time of this showtime
+     */
+    public LocalTime getpTime() {
+        return this.aTime;
     }
 
-    public void setpRoomID(int roomID) {
-        this.aRoomID = roomID;
+    /**
+     * Gets the movie title.
+     *
+     * @return the title of the movie being shown
+     */
+    public String getpTitle() {
+        return this.aTitle;
     }
 
-    public void setpManagerID(int managerID) {
-        this.aManagerID = managerID;
-    }
-    public void setpTitle(String movieTitle) { this.aTitle = movieTitle; }
-    public void setpDuration(int duration) { this.aDuration = duration; }
-
-
-    @Override
-    public String toString() {
-        return "ShowTime ID: " + aShowTimeID + ", Movie ID: " + aMovieID + ", Room ID: " + aRoomID +
-                ", Date: " + (aDate != null ? aDate.toString() : "N/A") +
-                ", Time: " + (aTime != null ? aTime.toString() : "N/A");
-            }
+    /**
+     * Gets the movie duration.
+     *
+     * @return the duration of the movie in minutes
+     */
+    public int getpDuration() {
+        return this.aDuration;
     }
 
+    /**
+     * Sets the room ID.
+     *
+     * @param pId the new room ID to set
+     */
+    public void setpRoomID(int pId) {
+        this.aRoom.setpRoomID(pId);
+    }
 
+    /**
+     * Sets the showtime date.
+     *
+     * @param pDate the new date to set
+     */
+    public void setpDate(LocalDate pDate) {
+        this.aDate = pDate;
+    }
 
+    /**
+     * Sets the showtime time.
+     *
+     * @param pTime the new time to set
+     */
+    public void setpTime(LocalTime pTime) {
+        this.aTime = pTime;
+    }
+
+    /**
+     * Sets the movie title.
+     *
+     * @param pTitle the new title to set
+     */
+    public void setpTitle(String pTitle) {
+        this.aTitle = pTitle;
+    }
+
+    /**
+     * Sets the movie duration.
+     *
+     * @param pDuration the new duration in minutes to set
+     */
+    public void setpDuration(int pDuration) {
+        this.aDuration = pDuration;
+    }
+
+    /**
+     * Sets the movie ID and automatically updates the title and duration.
+     * <p>
+     * This method retrieves the movie from the DataStore and updates
+     * the cached title and duration fields.
+     * </p>
+     *
+     * @param pId the new movie ID to set
+     */
+    public void setpMovieID(int pId) {
+        this.aMovieID = pId;
+
+        Movie movie = DataStore.getMovieById(pId);
+        if (movie != null) {
+            this.aTitle = movie.getpTitle();
+            this.aDuration = movie.getpDuration();
+        }
+    }
+}

@@ -1,13 +1,14 @@
 package com.example.movietheater.Models;
 
 /**
- * Represents a movie in the system.
+ * Represents a movie in the theater system.
+ * <p>
  * Contains basic information such as ID, title, and duration.
+ * Movies can be scheduled for showtimes in various theater rooms.
+ * </p>
  *
- * Fields:
- * - movieID: The unique identifier for the movie.
- * - Title: The title of the movie.
- * - duration: The duration of the movie in minutes.
+ * @author Movie Theater Application
+ * @version 1.0
  */
 public class Movie {
 
@@ -20,40 +21,80 @@ public class Movie {
     /** The duration of the movie in minutes. */
     private int aDuration;
 
-
-    public Movie (int movieID, String title, int duration) {
-        this.aMovieID = movieID;
-        this.aTitle = title;
-        this.aDuration = duration;
+    /**
+     * Constructs a new Movie with the specified ID, title, and duration.
+     *
+     * @param pMovieID the unique identifier for the movie
+     * @param pTitle the title of the movie
+     * @param pDuration the duration of the movie in minutes
+     */
+    public Movie(int pMovieID, String pTitle, int pDuration) {
+        this.aMovieID = pMovieID;
+        this.aTitle = pTitle;
+        this.aDuration = pDuration;
     }
 
-    //properties
+    /**
+     * Gets the movie ID.
+     *
+     * @return the unique identifier of this movie
+     */
     public int getpMovieID() {
-        return aMovieID;
+        return this.aMovieID;
     }
 
-    public void setpMovieID(int aMovieID) {
-        this.aMovieID = aMovieID;
+    /**
+     * Sets the movie ID.
+     *
+     * @param pMovieID the new movie ID to set
+     */
+    public void setpMovieID(int pMovieID) {
+        this.aMovieID = pMovieID;
     }
 
+    /**
+     * Gets the movie title.
+     *
+     * @return the title of this movie
+     */
     public String getpTitle() {
-        return aTitle;
+        return this.aTitle;
     }
 
-    public void setpTitle(String aTitle) {
-        this.aTitle = aTitle;
+    /**
+     * Sets the movie title.
+     *
+     * @param pTitle the new title to set
+     */
+    public void setpTitle(String pTitle) {
+        this.aTitle = pTitle;
     }
 
+    /**
+     * Gets the movie duration.
+     *
+     * @return the duration of this movie in minutes
+     */
     public int getpDuration() {
-        return aDuration;
-    }
-    public void setpDuration(int aDuration) {
-        this.aDuration = aDuration;
+        return this.aDuration;
     }
 
+    /**
+     * Sets the movie duration.
+     *
+     * @param pDuration the new duration in minutes to set
+     */
+    public void setpDuration(int pDuration) {
+        this.aDuration = pDuration;
+    }
+
+    /**
+     * Returns a string representation of the movie.
+     *
+     * @return a string in the format "[ID]  [Title] ([Duration] mins)"
+     */
     @Override
     public String toString() {
-        return aMovieID + "  " + aTitle + " (" + aDuration + " mins";
+        return this.aMovieID + "  " + this.aTitle + " (" + this.aDuration + " mins)";
     }
-
 }

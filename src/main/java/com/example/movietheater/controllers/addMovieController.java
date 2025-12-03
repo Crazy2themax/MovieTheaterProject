@@ -1,21 +1,24 @@
 package com.example.movietheater.controllers;
 
-import com.example.movietheater.Models.Movie;
 import com.example.movietheater.Models.DataStore;
+import com.example.movietheater.Models.Movie;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-
 
 /**
- * Controller class for the "Add com.example.movietheater.Models.Movie" view.
+ * Controller class for the "Add Movie" view.
  * <p>
- * This class handles the interaction between the user and the "Add com.example.movietheater.Models.Movie" form,
+ * Handles the interaction between the user and the "Add Movie" form,
  * allowing the user to input a movie ID, title, and duration, and either save or cancel the action.
+ * Validates all input before adding the movie to the DataStore.
  * </p>
+ *
+ * @author Movie Theater Application
+ * @version 1.0
  */
 public class addMovieController {
 
@@ -42,29 +45,30 @@ public class addMovieController {
     /**
      * Initializes the controller.
      * <p>
-     * This method is called automatically after the FXML file has been loaded.
-     * You can use it to initialize any controls or data if needed.
+     * Called automatically after the FXML file has been loaded.
+     * Can be used for additional initialization if needed.
      * </p>
      */
     @FXML
     public void initialize() {
-        // initialize any controls
+        // Additional initialization if needed
     }
 
     /**
-     * Handles the action of saving a movie.
+     * Handles the save button click event.
      * <p>
-     * Retrieves the movie ID, title, and duration from the text fields,
-     * prints them to the console, and can be extended to validate and add the movie to the model.
+     * Retrieves and validates the movie ID, title, and duration from the text fields.
+     * Checks for empty fields, valid numbers, positive values, and duplicate IDs.
+     * Adds the movie to the DataStore if all validations pass.
      * </p>
      */
     @FXML
     private void onAddMovieSaveButtonClick() {
         try {
             // Get and trim inputs
-            String idText = addMovieIDTextField.getText().trim();
-            String title = addMovieTitleTextField.getText().trim();
-            String durationText = addMovieDurationTextField.getText().trim();
+            String idText = this.addMovieIDTextField.getText().trim();
+            String title = this.addMovieTitleTextField.getText().trim();
+            String durationText = this.addMovieDurationTextField.getText().trim();
 
             // Check if fields are empty
             if (idText.isEmpty()) {
@@ -107,8 +111,8 @@ public class addMovieController {
             DataStore.movieList.add(newMovie);
 
             // Close the window
-            Stage s = (Stage) addMovieSaveButton.getScene().getWindow();
-            s.close();
+            Stage stage = (Stage) this.addMovieSaveButton.getScene().getWindow();
+            stage.close();
 
         } catch (NumberFormatException e) {
             new Alert(AlertType.ERROR, "ID and duration must be valid numbers.").showAndWait();
@@ -116,14 +120,14 @@ public class addMovieController {
     }
 
     /**
-     * Handles the action of cancelling the add movie operation.
+     * Handles the cancel button click event.
      * <p>
      * Closes the current window without saving any data.
      * </p>
      */
     @FXML
     private void onAddMovieCancelButtonClick() {
-        Stage s = (Stage) addMovieCancelButton.getScene().getWindow();
-        s.close();
+        Stage stage = (Stage) this.addMovieCancelButton.getScene().getWindow();
+        stage.close();
     }
 }

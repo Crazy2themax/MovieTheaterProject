@@ -1,31 +1,26 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.Models.DataStore;
 import com.example.movietheater.Models.Movie;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert;
-import com.example.movietheater.Models.DataStore;
 
 /**
- * Controller class for the "Edit com.example.movietheater.Models.Movie" view.
+ * Controller class for the "Edit Movie" view.
  * <p>
  * Handles the interaction for editing an existing movie's information,
  * including movie ID, title, and duration. Provides functionality to save changes
- * or cancel the editing process.
+ * or cancel the editing process. Validates all input and checks for duplicate IDs.
  * </p>
+ *
+ * @author Movie Theater Application
+ * @version 1.0
  */
 public class EditMovieController {
 
-    private Movie movie;
-
-    public void setMovie(Movie aMovie) {
-        this.movie = aMovie;
-        editMovieIDTextField.setText(String.valueOf(movie.getpMovieID()));
-        editMovieTitleTextField.setText(movie.getpTitle());
-        editMovieDurationTextField.setText(String.valueOf(movie.getpDuration()));
-    }
     /** TextField for editing the movie ID. */
     @FXML
     private TextField editMovieIDTextField;
@@ -46,44 +41,59 @@ public class EditMovieController {
     @FXML
     private Button EditMovieCancelButton;
 
+    /** The movie being edited. */
+    private Movie aMovie;
+
     /**
      * Initializes the controller.
      * <p>
      * Called automatically after the FXML file has been loaded.
-     * Can be used to preload the movie data passed by the caller.
+     * Can be used for additional initialization if needed.
      * </p>
      */
     @FXML
     public void initialize() {
-        // preload movie data given by caller
     }
 
     /**
-     * Handles saving the edited movie.
+     * Sets the movie to be edited and populates the form fields.
+     *
+     * @param pMovie the movie to edit
+     */
+    public void setMovie(Movie pMovie) {
+        this.aMovie = pMovie;
+        this.editMovieIDTextField.setText(String.valueOf(pMovie.getpMovieID()));
+        this.editMovieTitleTextField.setText(pMovie.getpTitle());
+        this.editMovieDurationTextField.setText(String.valueOf(pMovie.getpDuration()));
+    }
+
+    /**
+     * Handles the save button click event.
      * <p>
      * Validates and saves the updated movie information.
-     * Curently prints a message to the console; extend this method to update the model.
+     * Checks for empty fields, valid numbers, positive values, and duplicate IDs
+     * (allowing the movie to keep its current ID).
      * </p>
      */
     @FXML
     private void onEditMovieSaveButtonClick() {
         try {
             // Get and trim inputs
-            String idText = editMovieIDTextField.getText().trim();
-            String newTitle = editMovieTitleTextField.getText().trim();
-            String durationText = editMovieDurationTextField.getText().trim();
+            String idText = this.editMovieIDTextField.getText().trim();
+            String newTitle = this.editMovieTitleTextField.getText().trim();
+            String durationText = this.editMovieDurationTextField.getText().trim();
 
             // Check if fields are empty
             if (idText.isEmpty()) {
-                showError("Movie ID cannot be empty.");
+                this.showError("Movie ID cannot be empty.");
                 return;
             }
             if (newTitle.isEmpty()) {
-                showError("Title cannot be empty.");
+                this.showError("Title cannot be empty.");
                 return;
             }
             if (durationText.isEmpty()) {
-                showError("Duration cannot be empty.");
+                this.showError("Duration cannot be empty.");
                 return;
             }
 
@@ -93,53 +103,57 @@ public class EditMovieController {
 
             // Validate ID is positive
             if (newID <= 0) {
-                showError("Movie ID must be a positive number.");
+                this.showError("Movie ID must be a positive number.");
                 return;
             }
 
             // Validate duration is positive
             if (newDuration <= 0) {
-                showError("Duration must be a positive number.");
+                this.showError("Duration must be a positive number.");
                 return;
             }
 
             // Check if the new ID already exists (but allow keeping the same ID)
-            if (newID != movie.getpMovieID()) {
+            if (newID != this.aMovie.getpMovieID()) {
                 Movie existingMovie = DataStore.getMovieById(newID);
                 if (existingMovie != null) {
-                    showError("A movie with ID " + newID + " already exists.");
+                    this.showError("A movie with ID " + newID + " already exists.");
                     return;
                 }
             }
 
             // Update the movie
-            movie.setpMovieID(newID);
-            movie.setpTitle(newTitle);
-            movie.setpDuration(newDuration);
+            this.aMovie.setpMovieID(newID);
+            this.aMovie.setpTitle(newTitle);
+            this.aMovie.setpDuration(newDuration);
 
-            Stage s = (Stage) editMovieSaveButton.getScene().getWindow();
-            s.close();
+            // Close the window
+            Stage stage = (Stage) this.editMovieSaveButton.getScene().getWindow();
+            stage.close();
 
         } catch (NumberFormatException e) {
-            showError("ID and Duration must be valid numbers.");
+            this.showError("ID and Duration must be valid numbers.");
         }
     }
 
-    private void showError(String msg) {
-        new Alert(Alert.AlertType.ERROR, msg).showAndWait();
+    /**
+     * Displays an error dialog with the specified message.
+     *
+     * @param pMessage the error message to display
+     */
+    private void showError(String pMessage) {
+        new Alert(Alert.AlertType.ERROR, pMessage).showAndWait();
     }
 
-
     /**
-     * Handles cancelling the edit operation.
+     * Handles the cancel button click event.
      * <p>
      * Closes the current window without saving changes.
      * </p>
      */
     @FXML
     private void onEditMovieCancelButtonClick() {
-        Stage s = (Stage) EditMovieCancelButton.getScene().getWindow();
-        s.close();
+        Stage stage = (Stage) this.EditMovieCancelButton.getScene().getWindow();
+        stage.close();
     }
-
 }

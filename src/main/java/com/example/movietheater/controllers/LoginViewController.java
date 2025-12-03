@@ -48,6 +48,7 @@ public class LoginViewController
         users.add(new Client(2, "Riley", "Bandit"));
     }
 
+    // Handles logging in
     public void OnLoginButtonClick(ActionEvent event) throws IOException {
 
         String enteredName = nameTextPrompt.getText();
@@ -106,12 +107,14 @@ public class LoginViewController
         alert.showAndWait();
     }
 
+    // Closes application
     public void OnExitButtonClick(ActionEvent event)
     {
         Stage stage = (Stage) passwordTextPrompt.getScene().getWindow();
         stage.close();
     }
-    
+
+    // Opens sign up view
     public void OnSignUpButtonClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/SignUp.fxml"));
         Parent rootNode = loader.load();

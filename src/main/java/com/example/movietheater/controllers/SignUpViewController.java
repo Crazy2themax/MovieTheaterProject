@@ -49,6 +49,7 @@ public class SignUpViewController
         this.loginController = controller;
     }
 
+    // Handles creating a new account
     @FXML
     public void OnCreateButtonClick(ActionEvent actionEvent) {
 
@@ -92,6 +93,7 @@ public class SignUpViewController
         stage.close();
     }
 
+    // Close window
     public void OnCancelButtonClick(ActionEvent actionEvent)
     {
         Stage stage = (Stage) passwordTextPrompt.getScene().getWindow();

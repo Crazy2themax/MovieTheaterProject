@@ -1,56 +1,54 @@
 package com.example.movietheater.Models;
 
-
+/**
+ * Represents a show room in the movie theater.
+ * <p>
+ * Each show room has a unique identifier and can host movie showtimes.
+ * This class provides basic information about theater rooms.
+ * </p>
+ *
+ * @author Movie Theater Application
+ * @version 1.0
+ */
 public class ShowRoom {
 
-    /**
-     * The unique identifier for the room.
-     */
+    /** The unique identifier for this show room. */
     private int aRoomID;
 
     /**
-     * The maximum number of people the room can hold.
+     * Constructs a new ShowRoom with the specified room ID.
+     *
+     * @param pRoomID the unique identifier for this show room
      */
-    private int aCapacity;
+    public ShowRoom(int pRoomID) {
+        this.aRoomID = pRoomID;
+    }
 
     /**
-     * The room number or name.
+     * Gets the room ID.
+     *
+     * @return the unique identifier of this show room
      */
-    private String aRoomNumber;
-
-    //constructor
-    public ShowRoom(int roomID, int capacity, String roomNumber) {
-        this.aRoomID = roomID;
-        this.aCapacity = capacity;
-        this.aRoomNumber = roomNumber;
-    }
-
-    //Properties
     public int getpRoomID() {
-        return aRoomID;
-    }
-    public int getpCapacity() {
-        return aCapacity;
-    }
-    public String getpRoomNumber() {
-        return aRoomNumber;
+        return this.aRoomID;
     }
 
-    //properties (Setters)
-    public void setpRoomID(int roomID) {
-        this.aRoomID = roomID;
-    }
-    public void setpCapacity(int capacity) {
-        this.aCapacity = capacity;
-
-    }
-
-    public void setpRoomNumber(String roomNumber) {
-        this.aRoomNumber = roomNumber;
+    /**
+     * Sets the room ID.
+     *
+     * @param pRoomID the new room ID to set
+     */
+    public void setpRoomID(int pRoomID) {
+        this.aRoomID = pRoomID;
     }
 
+    /**
+     * Returns a string representation of the show room.
+     *
+     * @return a string in the format "Room [ID]"
+     */
     @Override
     public String toString() {
-        return "Room " + aRoomNumber + " (Capacity: " + aCapacity + ")";
+        return "Room " + this.aRoomID;
     }
 }
