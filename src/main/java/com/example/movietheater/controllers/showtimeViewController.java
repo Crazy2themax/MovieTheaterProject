@@ -20,14 +20,6 @@ public class showtimeViewController {
     @FXML
     private Button ShowTimeLogoutButton;
 
-    @FXML
-    private Button ShowTimeEditButton;
-
-    @FXML
-    private Button ShowTimeAddButton;
-
-    @FXML
-    private Button ShowTimeMovieListButton;
 
     @FXML
     private Button ShowTimeDeleteButton;
@@ -37,6 +29,9 @@ public class showtimeViewController {
 
     @FXML
     private TableColumn<ShowTime, String> movieTitleColumn;
+
+    @FXML
+    private TableColumn<ShowTime, Integer> roomColumn;
 
     @FXML
     private TableColumn<ShowTime, String> timeColumn;
@@ -49,8 +44,12 @@ public class showtimeViewController {
 
     private ObservableList<ShowTime> showtimeObservableList;
 
+
+
     @FXML
     public void initialize() {
+        // Don't create a new list - use DataStore.showTimes directly!
+        showtimeTableView.setItems(DataStore.showTimes);
 
         // Movie title column
         movieTitleColumn.setCellValueFactory(cellData -> {
@@ -59,6 +58,22 @@ public class showtimeViewController {
                     m != null ? m.getpTitle() : "Unknown"
             );
         });
+        showtimeObservableList = FXCollections.observableList(DataStore.showTimes);
+        showtimeTableView.setItems(showtimeObservableList);
+
+        // Movie title column
+        movieTitleColumn.setCellValueFactory(cellData -> {
+            Movie m = DataStore.getMovieById(cellData.getValue().getpMovieID());
+            return new javafx.beans.property.SimpleStringProperty(
+                    m != null ? m.getpTitle() : "Unknown"
+            );
+        });
+
+        // room column
+        roomColumn.setCellValueFactory(cellData ->
+                        new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getpRoomID()).asObject()
+        );
+
 
         // Time column
         timeColumn.setCellValueFactory(cellData -> {
@@ -88,9 +103,7 @@ public class showtimeViewController {
             ).asObject();
         });
 
-        // Load showtimes
-        showtimeObservableList = FXCollections.observableArrayList(DataStore.showTimes);
-        showtimeTableView.setItems(showtimeObservableList);
+
     }
 
 
@@ -106,13 +119,12 @@ public class showtimeViewController {
             stage.setTitle("Add Showtime");
             stage.setScene(new Scene(root));
             stage.show();
+            stage.setOnHidden(e -> showtimeTableView.refresh());
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
     @FXML
     private void onShowTimeEditButtonClick() {
         ShowTime selected = showtimeTableView.getSelectionModel().getSelectedItem();
@@ -120,7 +132,6 @@ public class showtimeViewController {
             new Alert(Alert.AlertType.WARNING, "Please select a showtime to edit.").showAndWait();
             return;
         }
-
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/com/example/movietheater/EditShowtime.fxml")
@@ -130,27 +141,29 @@ public class showtimeViewController {
             EditShowtimeController controller = loader.getController();
             controller.setShowTime(selected);
 
+
             Stage stage = new Stage();
             stage.setTitle("Edit Showtime");
             stage.setScene(new Scene(root));
             stage.show();
-
+            stage.setOnHidden(e -> showtimeTableView.refresh());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
     @FXML
     private void onShowTimeDeleteButtonClick() {
         ShowTime selected = showtimeTableView.getSelectionModel().getSelectedItem();
+
         if (selected == null) {
             new Alert(Alert.AlertType.WARNING, "Please select a showtime to delete.").showAndWait();
             return;
         }
 
+        // Just remove from DataStore - the TableView will update automatically!
         DataStore.showTimes.remove(selected);
-        showtimeObservableList.remove(selected);
+        showtimeTableView.refresh();
     }
 
 
@@ -174,7 +187,7 @@ public class showtimeViewController {
 
 
     @FXML
-    private void onShowTimeLogoutButtoClickn() {
+    private void onShowTimeLogoutButtonClick() {
         Stage s = (Stage) ShowTimeLogoutButton.getScene().getWindow();
         s.close();
     }

@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import com.example.movietheater.Models.DataStore;
 
 /**
  * Controller class for the "Edit com.example.movietheater.Models.Movie" view.
@@ -38,7 +40,7 @@ public class EditMovieController {
 
     /** Button to save the edited movie information. */
     @FXML
-    private Button EditMovieSaveButton;
+    private Button editMovieSaveButton;
 
     /** Button to cancel the edit operation. */
     @FXML
@@ -64,14 +66,67 @@ public class EditMovieController {
      * </p>
      */
     @FXML
-    private void EditMovieSaveButton() {
-        // validate & save updated movie
-        movie.setpMovieID(Integer.parseInt(editMovieIDTextField.getText()));
-        movie.setpTitle(editMovieTitleTextField.getText());
-        movie.setpDuration(Integer.parseInt(editMovieDurationTextField.getText()));
+    private void onEditMovieSaveButtonClick() {
+        try {
+            // Get and trim inputs
+            String idText = editMovieIDTextField.getText().trim();
+            String newTitle = editMovieTitleTextField.getText().trim();
+            String durationText = editMovieDurationTextField.getText().trim();
 
-        Stage s = (Stage) EditMovieSaveButton.getScene().getWindow();
-        s.close();
+            // Check if fields are empty
+            if (idText.isEmpty()) {
+                showError("Movie ID cannot be empty.");
+                return;
+            }
+            if (newTitle.isEmpty()) {
+                showError("Title cannot be empty.");
+                return;
+            }
+            if (durationText.isEmpty()) {
+                showError("Duration cannot be empty.");
+                return;
+            }
+
+            // Parse numbers
+            int newID = Integer.parseInt(idText);
+            int newDuration = Integer.parseInt(durationText);
+
+            // Validate ID is positive
+            if (newID <= 0) {
+                showError("Movie ID must be a positive number.");
+                return;
+            }
+
+            // Validate duration is positive
+            if (newDuration <= 0) {
+                showError("Duration must be a positive number.");
+                return;
+            }
+
+            // Check if the new ID already exists (but allow keeping the same ID)
+            if (newID != movie.getpMovieID()) {
+                Movie existingMovie = DataStore.getMovieById(newID);
+                if (existingMovie != null) {
+                    showError("A movie with ID " + newID + " already exists.");
+                    return;
+                }
+            }
+
+            // Update the movie
+            movie.setpMovieID(newID);
+            movie.setpTitle(newTitle);
+            movie.setpDuration(newDuration);
+
+            Stage s = (Stage) editMovieSaveButton.getScene().getWindow();
+            s.close();
+
+        } catch (NumberFormatException e) {
+            showError("ID and Duration must be valid numbers.");
+        }
+    }
+
+    private void showError(String msg) {
+        new Alert(Alert.AlertType.ERROR, msg).showAndWait();
     }
 
 
@@ -82,10 +137,9 @@ public class EditMovieController {
      * </p>
      */
     @FXML
-    private void EditMovieCancelButton() {
+    private void onEditMovieCancelButtonClick() {
         Stage s = (Stage) EditMovieCancelButton.getScene().getWindow();
         s.close();
     }
-
 
 }
