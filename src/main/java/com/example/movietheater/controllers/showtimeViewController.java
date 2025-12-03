@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 public class showtimeViewController {
 
     @FXML
-    private Button ShowTimeLogoutButton;
+    private Button LogOutShowTimeMangerViewButton;
 
 
     @FXML
@@ -185,10 +185,13 @@ public class showtimeViewController {
         }
     }
 
-
     @FXML
     private void onShowTimeLogoutButtonClick() {
-        Stage s = (Stage) ShowTimeLogoutButton.getScene().getWindow();
-        s.close();
+            // Close current MovieList window
+            Stage currentStage = (Stage) LogOutShowTimeMangerViewButton.getScene().getWindow();
+            currentStage.close();
     }
+
+
+
 }
