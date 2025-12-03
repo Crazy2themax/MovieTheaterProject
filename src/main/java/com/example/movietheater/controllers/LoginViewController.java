@@ -84,10 +84,10 @@ public class LoginViewController
                     stage.initOwner(((Node) event.getSource()).getScene().getWindow());
                     stage.showAndWait();
                 } else if (u.getRole().equals("Client")) {
-                    FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("showTimeView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("ShowtimeListClient.fxml"));
                     Parent rootNode = loader.load();
 
-                    showtimeViewController controller = loader.getController();
+                    ClientShowtimeViewController controller = loader.getController();
 
                     Stage stage = new Stage();
                     stage.setScene(new Scene(rootNode));
@@ -106,23 +106,12 @@ public class LoginViewController
         alert.showAndWait();
     }
 
-
-
-    /**
-     *
-     * @param event
-     */
     public void OnExitButtonClick(ActionEvent event)
     {
         Stage stage = (Stage) passwordTextPrompt.getScene().getWindow();
         stage.close();
     }
-
-    /**
-     *
-     * @param event
-     * @throws IOException
-     */
+    
     public void OnSignUpButtonClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/SignUp.fxml"));
         Parent rootNode = loader.load();
