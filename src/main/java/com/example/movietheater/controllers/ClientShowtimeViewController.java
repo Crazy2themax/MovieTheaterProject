@@ -75,14 +75,16 @@ public class ClientShowtimeViewController
         ShowTime selected = showtimeTable.getSelectionModel().getSelectedItem();
 
         if (selected == null) {
-            new Alert(Alert.AlertType.WARNING, "Please select a showtime to purchase.").showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a showtime to purchase.");
+            alert.showAndWait();
+
             return;
+
         }
 
         // Just show confirmation
-        new Alert(Alert.AlertType.INFORMATION,
-                "Ticket purchased for " + selected.toString()
-        ).showAndWait();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Ticket purchased!");
+        alert.showAndWait();
     }
 
     public void OnLogoutButtonClick(ActionEvent actionEvent)
