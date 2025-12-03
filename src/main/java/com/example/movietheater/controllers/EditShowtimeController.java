@@ -6,10 +6,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import java.time.format.DateTimeFormatter;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-import com.example.movietheater.Models.Movie;
+
 import com.example.movietheater.Models.DataStore;
 
 
@@ -59,14 +59,18 @@ public class EditShowtimeController {
         // preload selected showtime data into fields
     }
     private ShowTime currentShowtime;
-    public void setShowTime(ShowTime showtime){
+    public void setShowTime(ShowTime showtime) {
         this.currentShowtime = showtime;
 
         editShowTimeMovieIDTextField.setText(String.valueOf(showtime.getpMovieID()));
         editShowTimeRoomNumberTextField.setText(String.valueOf(showtime.getpRoomID()));
-        editShowTimeTimeTextField.setText(showtime.getpTime() != null ? showtime.getpTime().toString() : "");
-        editShowTimeDateTextField.setText((showtime.getpDate()!= null ? showtime.getpDate().toString() : ""));
-}
+        editShowTimeTimeTextField.setText(
+                showtime.getpTime() != null ? showtime.getpTime().toString() : ""
+        );
+        editShowTimeDateTextField.setText(
+                showtime.getpDate() != null ? showtime.getpDate().toString() : ""
+        );
+    }
 
     @FXML
     private void onEditShowtimeSaveButtonClick() {
@@ -143,7 +147,7 @@ public class EditShowtimeController {
             for (ShowTime existing : DataStore.showTimes) {
 
                 // skip the current showtime so it doesn't conflict with itself
-                if (existing.getShowTimeID() == currentShowtime.getShowTimeID()) {
+                if (existing.getaShowTimeID() == currentShowtime.getaShowTimeID()) {
                     continue;
                 }
 
