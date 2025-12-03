@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="309.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movietheater.controllers.LoginViewController">
+<AnchorPane prefHeight="309.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movietheater.controllers.LoginViewController">
    <children>
       <TextField fx:id="nameTextPrompt" layoutX="197.0" layoutY="98.0" prefHeight="26.0" prefWidth="290.0" promptText="Enter Username">
          <opaqueInsets>
@@ -19,8 +19,8 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button onAction="#OnLoginButtonClick" layoutX="233.0" layoutY="183.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="94.0" text="Login" />
-      <Button onAction="#OnExitButtonClick" layoutX="373.0" layoutY="184.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="94.0" text="Exit" />
+      <Button layoutX="233.0" layoutY="183.0" mnemonicParsing="false" onAction="#OnLoginButtonClick" prefHeight="51.0" prefWidth="94.0" text="Login" />
+      <Button layoutX="373.0" layoutY="184.0" mnemonicParsing="false" onAction="#OnExitButtonClick" prefHeight="51.0" prefWidth="94.0" text="Exit" />
       <Label layoutX="31.0" layoutY="93.0" text="Username:">
          <font>
             <Font size="24.0" />
@@ -35,7 +35,7 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <Button onAction="#OnSignUpButtonClick" layoutX="336.0" layoutY="259.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="94.0" text="Sign Up" />
+      <Button layoutX="336.0" layoutY="259.0" mnemonicParsing="false" onAction="#OnSignUpButtonClick" prefHeight="35.0" prefWidth="94.0" text="Sign Up" />
       <Label layoutX="58.0" layoutY="259.0" text="Don't have an account?">
          <font>
             <Font size="24.0" />
@@ -44,6 +44,5 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <Button onAction="#OnManagerButtonClick" layoutX="31.0" layoutY="184.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="126.0" text="Log in as manager" />
    </children>
 </AnchorPane>

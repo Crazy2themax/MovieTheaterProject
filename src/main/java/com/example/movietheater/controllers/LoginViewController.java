@@ -34,6 +34,9 @@ public class LoginViewController
     @FXML
     private TextField passwordTextPrompt;
 
+    /**
+     * List to store user objects
+     */
     private List<User> users = new ArrayList<>();
 
     @FXML
@@ -63,7 +66,8 @@ public class LoginViewController
             if (u.getName().equals(enteredName) &&
                     u.getPassword().equals(enteredPassword)) {
 
-                System.out.println("Login successful! Role: " + u.getRole());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Login successful! Role: " + u.getRole());
+                alert.showAndWait();
 
                 if (u.getRole().equals("Manager")) {
                     FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("showTimeView.fxml"));
@@ -97,7 +101,8 @@ public class LoginViewController
 
 
         // If reached here, no match was found
-        System.out.println("Invalid credentials.");
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Account not found! Try signing in?");
+        alert.showAndWait();
     }
 
 
@@ -117,46 +122,28 @@ public class LoginViewController
      * @param event
      * @throws IOException
      */
-    /*public void OnManagerButtonClick(ActionEvent event) throws IOException {
-        if(nameTextPrompt.getText().equals("manager") && passwordTextPrompt.getText().equals("password123"))
-        {
-            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("showTimeView.fxml"));
-            Parent rootNode = loader.load();
-
-            showtimeViewController controller = loader.getController();
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(rootNode));
-            stage.setTitle("Showtime View");
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
-            stage.showAndWait();
-        }
-        else if(nameTextPrompt.getText().isEmpty() || passwordTextPrompt.getText().isEmpty())
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Username or Password is empty!");
-            alert.showAndWait();
-        }
-        else
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Incorrect Username or Password for Manager!");
-            alert.showAndWait();
-        }
-    }*/
-
-    /**
-     *
-     * @param event
-     * @throws IOException
-     */
     public void OnSignUpButtonClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/SignUp.fxml"));
         Parent rootNode = loader.load();
 
         SignUpViewController controller = loader.getController();
+        controller.setLoginController(this);
 
         Stage stage = new Stage();
         stage.setScene(new Scene(rootNode));
+        stage.setTitle("Create Account");
         stage.show();
+    }
+
+    public boolean usernameExists(String name) {
+        return users.stream().anyMatch(u -> u.getName().equalsIgnoreCase(name));
+    }
+
+    public int getNextUserId() {
+        return users.size() + 1;
+    }
+
+    public void addUser(User user) {
+        users.add(user);
     }
 }

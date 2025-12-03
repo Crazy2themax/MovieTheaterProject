@@ -1,10 +1,12 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.Models.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -31,17 +33,6 @@ public class SignUpViewController
     @FXML
     private TextField confirmTextPrompt;
 
-    /**
-     * Button to create a new account
-     */
-    @FXML
-    private Button createButton;
-
-    /**
-     * Button to cancel the sign-up application
-     */
-    @FXML
-    private Button cancelButton;
 
     /**
      * Initializes the project
@@ -50,5 +41,60 @@ public class SignUpViewController
     public void initialize()
     {
 
+    }
+
+    private LoginViewController loginController; // reference to main controller
+
+    public void setLoginController(LoginViewController controller) {
+        this.loginController = controller;
+    }
+
+    @FXML
+    public void OnCreateButtonClick(ActionEvent actionEvent) {
+
+        String username = nameTextPrompt.getText();
+        String password = passwordTextPrompt.getText();
+        String confirm  = confirmTextPrompt.getText();
+
+        // Validate input
+        if (username.isEmpty() || password.isEmpty() || confirm.isEmpty())
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Username or Password is empty!");
+            alert.showAndWait();
+            return;
+        }
+
+        if (!password.equals(confirm))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Passwords do not match!");
+            alert.showAndWait();
+            return;
+        }
+
+        // Check if username already exists
+        if (loginController.usernameExists(username))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Username already taken!");
+            alert.showAndWait();
+            return;
+        }
+
+        // Create new user
+        int newId = loginController.getNextUserId();
+        Client newClient = new Client(newId, username, password);
+
+        loginController.addUser(newClient);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Account created successfully!");
+        alert.showAndWait();
+
+        // Close window
+        Stage stage = (Stage) passwordTextPrompt.getScene().getWindow();
+        stage.close();
+    }
+
+    public void OnCancelButtonClick(ActionEvent actionEvent)
+    {
+        Stage stage = (Stage) passwordTextPrompt.getScene().getWindow();
+        stage.close();
     }
 }
