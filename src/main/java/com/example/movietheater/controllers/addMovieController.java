@@ -1,9 +1,14 @@
 package com.example.movietheater.controllers;
 
+import com.example.movietheater.Models.Movie;
+import com.example.movietheater.Models.DataStore;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 
 /**
  * Controller class for the "Add com.example.movietheater.Models.Movie" view.
@@ -32,7 +37,7 @@ public class addMovieController {
 
     /** Button to cancel adding a movie. */
     @FXML
-    private Button addMoveiCancelButton;
+    private Button addMovieCancelButton;
 
     /**
      * Initializes the controller.
@@ -54,12 +59,60 @@ public class addMovieController {
      * </p>
      */
     @FXML
-    private void onSaveMovie() {
-        String id = addMovieIDTextField.getText();
-        String title = addMovieTitleTextField.getText();
-        String duration = addMovieDurationTextField.getText();
-        System.out.println("Saving movie: " + id + " - " + title + " (" + duration + ")");
-        // TODO: validate & add to list/model
+    private void onAddMovieSaveButtonClick() {
+        try {
+            // Get and trim inputs
+            String idText = addMovieIDTextField.getText().trim();
+            String title = addMovieTitleTextField.getText().trim();
+            String durationText = addMovieDurationTextField.getText().trim();
+
+            // Check if fields are empty
+            if (idText.isEmpty()) {
+                new Alert(AlertType.WARNING, "Movie ID cannot be empty.").showAndWait();
+                return;
+            }
+            if (title.isEmpty()) {
+                new Alert(AlertType.WARNING, "Movie title cannot be empty.").showAndWait();
+                return;
+            }
+            if (durationText.isEmpty()) {
+                new Alert(AlertType.WARNING, "Movie duration cannot be empty.").showAndWait();
+                return;
+            }
+
+            // Parse numbers
+            int id = Integer.parseInt(idText);
+            int duration = Integer.parseInt(durationText);
+
+            // Validate ID is positive
+            if (id <= 0) {
+                new Alert(AlertType.WARNING, "Movie ID must be a positive number.").showAndWait();
+                return;
+            }
+
+            // Validate duration is positive
+            if (duration <= 0) {
+                new Alert(AlertType.WARNING, "Duration must be a positive number.").showAndWait();
+                return;
+            }
+
+            // Check if ID already exists
+            if (DataStore.getMovieById(id) != null) {
+                new Alert(AlertType.ERROR, "A movie with ID " + id + " already exists.").showAndWait();
+                return;
+            }
+
+            // Create and add the movie
+            Movie newMovie = new Movie(id, title, duration);
+            DataStore.movieList.add(newMovie);
+
+            // Close the window
+            Stage s = (Stage) addMovieSaveButton.getScene().getWindow();
+            s.close();
+
+        } catch (NumberFormatException e) {
+            new Alert(AlertType.ERROR, "ID and duration must be valid numbers.").showAndWait();
+        }
     }
 
     /**
@@ -69,8 +122,8 @@ public class addMovieController {
      * </p>
      */
     @FXML
-    private void onCancel() {
-        Stage s = (Stage) addMoveiCancelButton.getScene().getWindow();
+    private void onAddMovieCancelButtonClick() {
+        Stage s = (Stage) addMovieCancelButton.getScene().getWindow();
         s.close();
     }
 }

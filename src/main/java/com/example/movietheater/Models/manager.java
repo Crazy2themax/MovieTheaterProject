@@ -20,11 +20,10 @@ public class manager extends User {
      *
      * @param id       the unique identifier for the user
      * @param name     the name of the user
-     * @param email    the email address of the user
      * @param password the password of the user
      */
-    public manager(int id, String name, String email, String password) {
-        super(id, name, email, password);
+    public manager(int id, String name, String password) {
+        super(id, name, password);
     }
 
     /**

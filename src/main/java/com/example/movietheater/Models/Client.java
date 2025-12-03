@@ -20,20 +20,19 @@ public class Client extends User {
      *
      * @param id       the unique identifier for the user
      * @param name     the name of the user
-     * @param email    the email address of the user
      * @param password the password of the user
      */
-    public Client(int id, String name, String email, String password) {
-        super(id, name, email, password);
+    public Client(int id, String name, String password) {
+        super(id, name, password);
     }
 
     /**
      * Returns the role of this user.
      *
-     * @return the string "com.example.movietheater.Models.Client"
+     * @return the string "Client"
      */
     @Override
     public String getRole() {
-        return "com.example.movietheater.Models.Client";
+        return "Client";
     }
 }
