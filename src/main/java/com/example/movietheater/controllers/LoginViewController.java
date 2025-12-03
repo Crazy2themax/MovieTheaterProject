@@ -68,7 +68,9 @@ public class LoginViewController
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Login successful! Role: " + u.getRole());
                 alert.showAndWait();
-
+                nameTextPrompt.clear();
+                passwordTextPrompt.clear();
+                
                 if (u.getRole().equals("Manager")) {
                     FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("showTimeView.fxml"));
                     Parent rootNode = loader.load();
@@ -98,7 +100,6 @@ public class LoginViewController
                 return;
             }
         }
-
 
         // If reached here, no match was found
         Alert alert = new Alert(Alert.AlertType.ERROR, "Account not found! Try signing in?");
