@@ -37,10 +37,18 @@ public abstract class User {
         this.aPassword = pPassword;
     }
 
+    /**
+     * Gets the name and returns it
+     * @return aName
+     */
     public String getName() {
         return aName;
     }
 
+    /**
+     * Gets the password and returns itW
+     * @return aPassword
+     */
     public String getPassword() {
         return aPassword;
     }

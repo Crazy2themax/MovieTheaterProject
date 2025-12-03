@@ -12,9 +12,6 @@ package com.example.movietheater.Models;
  */
 public class Client extends User {
 
-    /** The name of the client. */
-    String clientName;
-
     /**
      * Constructs a com.example.movietheater.Models.User object with the specified parameters.
      *
