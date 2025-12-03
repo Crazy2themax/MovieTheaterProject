@@ -40,6 +40,6 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="confirmTextPrompt" layoutX="196.0" layoutY="222.0" prefHeight="26.0" prefWidth="290.0" promptText="Enter Password" text="Enter Password" />
+      <TextField fx:id="confirmTextPrompt" layoutX="196.0" layoutY="222.0" prefHeight="26.0" prefWidth="290.0" promptText="Enter Password" />
    </children>
 </AnchorPane>

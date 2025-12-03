@@ -16,27 +16,33 @@ package com.example.movietheater.Models;
 public abstract class User {
 
     /** Unique identifier for the user. */
-    protected int Id;
+    protected int aId;
 
     /** Name of the user. */
-    protected String Name;
-
-    /** Email of the user. */
-    protected String Email;
+    protected String aName;
 
     /** Password of the user. */
-    protected String Password;
+    protected String aPassword;
 
     /**
      * Constructs a com.example.movietheater.Models.User object with the specified parameters.
      *
-     * @param id the unique identifier for the user
-     * @param name the name of the user
-     * @param email the email address of the user
-     * @param password the password of the user
+     * @param pId the unique identifier for the user
+     * @param pName the name of the user
+     * @param pPassword the password of the user
      */
-    public User(int id, String name, String email, String password) {
-        // Implementation can initialize the fields
+    public User(int pId, String pName, String pPassword) {
+        this.aId = pId;
+        this.aName = pName;
+        this.aPassword = pPassword;
+    }
+
+    public String getName() {
+        return aName;
+    }
+
+    public String getPassword() {
+        return aPassword;
     }
 
     /**
@@ -45,5 +51,6 @@ public abstract class User {
      *
      * @return a string representing the role of the user
      */
+
     public abstract String getRole();
 }
