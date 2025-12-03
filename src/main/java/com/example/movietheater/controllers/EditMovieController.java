@@ -53,7 +53,6 @@ public class EditMovieController {
      */
     @FXML
     public void initialize() {
-        // Additional initialization if needed
     }
 
     /**
