@@ -15,26 +15,26 @@ import java.io.IOException;
 
 public class SignUpViewController
 {
-    /**
+    /** Willow
      * Text Field for entering the username
      */
     @FXML
     private TextField nameTextPrompt;
 
-    /**
+    /** Willow
      * Text Field for entering the password
      */
     @FXML
     private TextField passwordTextPrompt;
 
-    /**
+    /** Willow
      * Text Field for entering the password
      */
     @FXML
     private TextField confirmTextPrompt;
 
 
-    /**
+    /** Willow
      * Initializes the project
      */
     @FXML

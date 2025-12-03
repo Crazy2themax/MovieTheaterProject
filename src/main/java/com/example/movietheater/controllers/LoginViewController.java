@@ -22,19 +22,19 @@ import java.util.List;
 
 public class LoginViewController
 {
-    /**
+    /** Willow
      * Text Field for entering the username
      */
     @FXML
     private TextField nameTextPrompt;
 
-    /**
+    /** Willow
      * Text Field for entering the password
      */
     @FXML
     private TextField passwordTextPrompt;
 
-    /**
+    /** Willow
      * List to store user objects
      */
     private List<User> users = new ArrayList<>();

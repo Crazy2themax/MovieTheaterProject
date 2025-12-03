@@ -16,18 +16,33 @@ import java.time.format.DateTimeFormatter;
 
 public class ClientShowtimeViewController
 {
+    /** Willow
+     * Table View for holding the showtimes
+     */
     @FXML
     private TableView<ShowTime> showtimeTable;
 
+    /** Willow
+     * Table Column for the title of the movie playing
+     */
     @FXML
     private TableColumn<ShowTime, String> movieTitleColumn;
 
+    /** Willow
+     * Table Column for the time of the showtime
+     */
     @FXML
     private TableColumn<ShowTime, String> timeColumn;
 
+    /** Willow
+     * Table Column for the date of the showtime
+     */
     @FXML
     private TableColumn<ShowTime, String> dateColumn;
 
+    /** Willow
+     * Table Column for the duration of the showtime
+     */
     @FXML
     private TableColumn<ShowTime, Integer> durationColumn;
 
