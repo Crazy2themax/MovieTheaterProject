@@ -7,36 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<!--
-    FXML Layout: ShowTimeView.fxml
-    Description:
-        This layout defines the "ShowTimes (Manager View)" in the JavaFX application.
-        It displays showtime cards for movies with associated images, durations, and times.
-        Provides buttons to log out, edit showtimes, add showtimes, delete showtimes, and
-        open the movie list.
-
-    Controller:
-        fx:controller="ShowTimeView"
-
-    Elements:
-        - AnchorPane: Root layout container with prefHeight=378.0 and prefWidth=446.0
-        - Label "ShowTimes (Manager View)": Title label
-        - Button LogOutShowTimeMangerViewButton: Logs out the com.example.movietheater.Models.manager
-        - AnchorPane (com.example.movietheater.Models.Movie Card): Displays movie information
-            - Label: com.example.movietheater.Models.Movie title (e.g., "Moana")
-            - ImageView: com.example.movietheater.Models.Movie poster
-            - Label: com.example.movietheater.Models.Movie duration
-            - Labels: Available showtimes
-        - AnchorPane (com.example.movietheater.Models.Movie Card): Another movie information card (e.g., "Avengers Endgame")
-            - Label: com.example.movietheater.Models.Movie title
-            - ImageView: com.example.movietheater.Models.Movie poster
-            - Label: com.example.movietheater.Models.Movie duration
-            - Labels: Available showtimes
-        - Button editShowTimeMangerViewButton: Opens edit showtime form
-        - Button AddShowTimeMangerViewButton: Opens add showtime form
-        - Button movieListShowTimeMangerViewButton: Opens movie list view
-        - Button DeleteShowTimeMangerViewButton: Deletes selected showtime
--->
 
 <AnchorPane prefHeight="495.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movietheater.controllers.showtimeViewController">
    <children>

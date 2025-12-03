@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
  * and utility methods for retrieving specific entities by ID.
  * </p>
  *
- * @author Movie Theater Application
+ * @author Maxim Gosselin
  * @version 1.0
  */
 public class DataStore {

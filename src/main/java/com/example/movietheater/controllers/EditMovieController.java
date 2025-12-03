@@ -16,8 +16,8 @@ import javafx.stage.Stage;
  * or cancel the editing process. Validates all input and checks for duplicate IDs.
  * </p>
  *
- * @author Movie Theater Application
- * @version 1.0
+ * @author Maxim Gosselin
+ * * @version 1.0
  */
 public class EditMovieController {
 

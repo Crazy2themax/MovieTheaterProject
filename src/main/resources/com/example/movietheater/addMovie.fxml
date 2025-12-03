@@ -6,29 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<!--
-    FXML Layout: AddMovie.fxml
-    Description:
-        This layout defines the "Add com.example.movietheater.Models.Movie" form in the JavaFX application.
-        It allows the user to enter a movie ID, title, and duration, and provides
-        buttons to save the movie or cancel the operation.
-
-    Controller:
-        fx:controller="AddMovie"
-
-    Elements:
-        - AnchorPane: Root layout container with prefHeight=245.0 and prefWidth=422.0
-        - Label "Add com.example.movietheater.Models.Movie": Title label with font size 20
-        - Label "movie ID": Label for movie ID input
-        - TextField addMovieIDTextField: Input field for movie ID
-        - Label "com.example.movietheater.Models.Movie Title": Label for movie title input
-        - TextField addMovieTitleTextField: Input field for movie title
-        - Label "Duration": Label for movie duration input
-        - TextField addMovieDurationTextField: Input field for movie duration
-        - Button addMovieSaveButton: Button to save the movie
-        - Button addMoveiCancelButton: Button to cancel the operation (note typo: Movei)
--->
-
 <AnchorPane prefHeight="245.0" prefWidth="422.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movietheater.controllers.addMovieController">
    <children>
       <Button fx:id="addMovieSaveButton" layoutX="165.0" layoutY="189.0" mnemonicParsing="false" onAction="#onAddMovieSaveButtonClick" text="Save" />

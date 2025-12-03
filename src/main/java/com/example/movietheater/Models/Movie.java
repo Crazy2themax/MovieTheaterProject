@@ -7,7 +7,7 @@ package com.example.movietheater.Models;
  * Movies can be scheduled for showtimes in various theater rooms.
  * </p>
  *
- * @author Movie Theater Application
+ * @author Maxim Gosselin
  * @version 1.0
  */
 public class Movie {

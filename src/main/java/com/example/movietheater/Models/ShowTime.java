@@ -11,7 +11,7 @@ import java.time.LocalTime;
  * for convenient access without repeated lookups.
  * </p>
  *
- * @author Movie Theater Application
+ * @author Maxim Gosselin
  * @version 1.0
  */
 public class ShowTime {

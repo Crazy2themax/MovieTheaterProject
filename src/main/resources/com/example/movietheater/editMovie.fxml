@@ -6,29 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<!--
-    FXML Layout: EditMovie.fxml
-    Description:
-        This layout defines the "Edit com.example.movietheater.Models.Movie" form in the JavaFX application.
-        It allows the user to edit an existing movie's ID, title, and duration.
-        Provides buttons to save changes or cancel the operation.
-
-    Controller:
-        fx:controller="EditMovie"
-
-    Elements:
-        - AnchorPane: Root layout container with prefHeight=265.0 and prefWidth=417.0
-        - Label "Edit com.example.movietheater.Models.Movie": Title label with font size 20
-        - Label "movie ID": Label for movie ID input
-        - TextField editMovieIDTextField: Input field for movie ID
-        - Label "com.example.movietheater.Models.Movie TItle": Label for movie title input
-        - TextField editMovieTitleTextField: Input field for movie title
-        - Label "Duration": Label for movie duration input
-        - TextField editMovieDurationTextField: Input field for movie duration
-        - Button editMovieSaveButton: Button to save the edited movie
-        - Button EditMovieCancelButton: Button to cancel editing
--->
-
 <AnchorPane prefHeight="265.0" prefWidth="417.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.movietheater.controllers.EditMovieController">
    <children>
       <Button fx:id="editMovieSaveButton" layoutX="121.0" layoutY="212.0" mnemonicParsing="false" onAction="#onEditMovieSaveButtonClick" text="Save" />

@@ -20,7 +20,7 @@ import java.time.LocalTime;
  * Validates all input and checks for scheduling conflicts.
  * </p>
  *
- * @author Movie Theater Application
+ * @author Maxim Gosselin
  * @version 1.0
  */
 public class EditShowtimeController {

@@ -7,7 +7,7 @@ package com.example.movietheater.Models;
  * This class provides basic information about theater rooms.
  * </p>
  *
- * @author Movie Theater Application
+ * @author Maxim Gosselin
  * @version 1.0
  */
 public class ShowRoom {

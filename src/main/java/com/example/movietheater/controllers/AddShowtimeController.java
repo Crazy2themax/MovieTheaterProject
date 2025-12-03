@@ -20,7 +20,7 @@ import java.time.LocalTime;
  * Checks for scheduling conflicts before adding the showtime.
  * </p>
  *
- * @author Movie Theater Application
+ * @author Maxim Gosselin
  * @version 1.0
  */
 public class AddShowtimeController {

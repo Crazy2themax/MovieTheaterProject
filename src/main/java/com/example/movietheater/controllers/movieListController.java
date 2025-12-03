@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  * Provides functionality to add, edit, and delete movies.
  * </p>
  *
- * @author Movie Theater Application
+ * @author Maxim Gosselin
  * @version 1.0
  */
 public class movieListController {

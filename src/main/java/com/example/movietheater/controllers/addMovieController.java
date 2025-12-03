@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  * Validates all input before adding the movie to the DataStore.
  * </p>
  *
- * @author Movie Theater Application
+ * @author Maxim Gosselin
  * @version 1.0
  */
 public class addMovieController {
