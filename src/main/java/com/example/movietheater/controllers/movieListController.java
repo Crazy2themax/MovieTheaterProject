@@ -1,11 +1,9 @@
 package com.example.movietheater.controllers;
 
 import com.example.movietheater.Models.DataStore;
+import com.example.movietheater.Models.Movie;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import com.example.movietheater.Models.Movie;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,40 +11,68 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+/**
+ * Controller class for the Movie List view.
+ * <p>
+ * Manages the display and manipulation of the movie list in a TableView.
+ * Provides functionality to add, edit, and delete movies.
+ * </p>
+ *
+ * @author Movie Theater Application
+ * @version 1.0
+ */
 public class movieListController {
 
+    /** TableView displaying all movies. */
     @FXML
     private TableView<Movie> movieTableView;
 
+    /** Column displaying movie IDs. */
     @FXML
     private TableColumn<Movie, Integer> MovieIDColumnMovieList;
 
+    /** Column displaying movie titles. */
     @FXML
     private TableColumn<Movie, String> MovieTitleColumnMovieList;
 
+    /** Column displaying movie durations. */
     @FXML
     private TableColumn<Movie, Integer> MovieDurationColumnMovieList;
 
+    /** Button to return to the previous view. */
     @FXML
     private Button backButton;
 
+    /**
+     * Initializes the controller.
+     * <p>
+     * Sets up the table columns with cell value factories and binds
+     * the TableView to the DataStore's movie list.
+     * </p>
+     */
     @FXML
     public void initialize() {
         // Set up table columns
-        MovieIDColumnMovieList.setCellValueFactory(
+        this.MovieIDColumnMovieList.setCellValueFactory(
                 cellData -> new SimpleIntegerProperty(cellData.getValue().getpMovieID()).asObject()
         );
-        MovieTitleColumnMovieList.setCellValueFactory(
+        this.MovieTitleColumnMovieList.setCellValueFactory(
                 cellData -> new SimpleStringProperty(cellData.getValue().getpTitle())
         );
-        MovieDurationColumnMovieList.setCellValueFactory(
+        this.MovieDurationColumnMovieList.setCellValueFactory(
                 cellData -> new SimpleIntegerProperty(cellData.getValue().getpDuration()).asObject()
         );
 
         // Use DataStore.movieList directly
-        movieTableView.setItems(DataStore.movieList);
+        this.movieTableView.setItems(DataStore.movieList);
     }
 
+    /**
+     * Handles the add movie button click event.
+     * <p>
+     * Opens a new window for adding a movie. Refreshes the table when the window closes.
+     * </p>
+     */
     @FXML
     private void onAddMovieMovieListClick() {
         try {
@@ -58,7 +84,7 @@ public class movieListController {
             stage.setScene(new Scene(root));
 
             // Refresh table when window closes
-            stage.setOnHidden(e -> movieTableView.refresh());
+            stage.setOnHidden(e -> this.movieTableView.refresh());
 
             stage.show();
         } catch (Exception e) {
@@ -66,13 +92,21 @@ public class movieListController {
         }
     }
 
+    /**
+     * Handles the edit movie button click event.
+     * <p>
+     * Opens a window for editing the selected movie. Shows a warning if no movie is selected.
+     * Refreshes the table when the window closes.
+     * </p>
+     */
     @FXML
     private void onEditMovieMovieListClick() {
-        Movie selected = movieTableView.getSelectionModel().getSelectedItem();
+        Movie selected = this.movieTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
             new Alert(Alert.AlertType.WARNING, "Please select a movie to edit.").showAndWait();
             return;
         }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/movietheater/EditMovie.fxml"));
             Parent root = loader.load();
@@ -85,7 +119,7 @@ public class movieListController {
             stage.setScene(new Scene(root));
 
             // Refresh table when window closes
-            stage.setOnHidden(e -> movieTableView.refresh());
+            stage.setOnHidden(e -> this.movieTableView.refresh());
 
             stage.show();
 
@@ -94,9 +128,15 @@ public class movieListController {
         }
     }
 
+    /**
+     * Handles the delete movie button click event.
+     * <p>
+     * Deletes the selected movie from the DataStore. Shows a warning if no movie is selected.
+     * </p>
+     */
     @FXML
     private void onDeleteMovieMovieListClick() {
-        Movie selected = movieTableView.getSelectionModel().getSelectedItem();
+        Movie selected = this.movieTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
             new Alert(Alert.AlertType.WARNING, "Please select a movie to delete.").showAndWait();
             return;
@@ -108,9 +148,15 @@ public class movieListController {
         System.out.println("Deleted movie: " + selected.getpTitle());
     }
 
+    /**
+     * Handles the back button click event.
+     * <p>
+     * Closes the current window and returns to the previous view.
+     * </p>
+     */
     @FXML
     private void onBackButtonMovieListClick() {
-        Stage s = (Stage) backButton.getScene().getWindow();
-        s.close();
+        Stage stage = (Stage) this.backButton.getScene().getWindow();
+        stage.close();
     }
 }

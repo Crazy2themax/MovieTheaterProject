@@ -3,10 +3,26 @@ package com.example.movietheater.Models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Centralized data storage class for the movie theater application.
+ * <p>
+ * This class manages all in-memory data including movies, show rooms, and showtimes.
+ * It provides static observable lists that can be bound to JavaFX UI components
+ * and utility methods for retrieving specific entities by ID.
+ * </p>
+ *
+ * @author Movie Theater Application
+ * @version 1.0
+ */
 public class DataStore {
 
+    /** Observable list containing all movies in the system. */
     public static ObservableList<Movie> movieList = FXCollections.observableArrayList();
+
+    /** Observable list containing all show rooms in the system. */
     public static ObservableList<ShowRoom> showRooms = FXCollections.observableArrayList();
+
+    /** Observable list containing all showtimes in the system. */
     public static ObservableList<ShowTime> showTimes = FXCollections.observableArrayList();
 
     static {
@@ -18,16 +34,32 @@ public class DataStore {
         );
     }
 
-    public static Movie getMovieById(int id) {
+    /**
+     * Retrieves a movie by its unique ID.
+     *
+     * @param pId the ID of the movie to retrieve
+     * @return the Movie object with the matching ID, or null if not found
+     */
+    public static Movie getMovieById(int pId) {
         for (Movie movie : movieList) {
-            if (movie.getpMovieID() == id) return movie;
+            if (movie.getpMovieID() == pId) {
+                return movie;
+            }
         }
         return null;
     }
 
-    public static ShowRoom getShowRoomById(int id) {
+    /**
+     * Retrieves a show room by its unique ID.
+     *
+     * @param pId the ID of the show room to retrieve
+     * @return the ShowRoom object with the matching ID, or null if not found
+     */
+    public static ShowRoom getShowRoomById(int pId) {
         for (ShowRoom showRoom : showRooms) {
-            if (showRoom.getpRoomID() == id) return showRoom;
+            if (showRoom.getpRoomID() == pId) {
+                return showRoom;
+            }
         }
         return null;
     }
