@@ -12,9 +12,6 @@ package com.example.movietheater.Models;
  */
 public class manager extends User {
 
-    /** The name of the com.example.movietheater.Models.manager. */
-    private String managerName;
-
     /**
      * Constructs a com.example.movietheater.Models.User object with the specified parameters.
      *
